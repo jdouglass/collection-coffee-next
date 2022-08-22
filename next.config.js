@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    domains: [
+      'collection-coffee-product-images-dev.s3.ca-central-1.amazonaws.com',
+    ],
+  },
   reactStrictMode: true,
   swcMinify: true,
 };

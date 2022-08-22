@@ -6,7 +6,7 @@ const base: IProductCard = {
   price: '20.00',
   weight: 340,
   process: 'Washed',
-  variety: ['Gesha', 'Pink Burbon'],
+  variety: ['Gesha', 'Pink Bourbon'],
   country: 'Mexico',
   product_url:
     'https://monogramcoffee.com/collections/whole-bean-coffee/products/florestales-filter?variant=40434093817909',

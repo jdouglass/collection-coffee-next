@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import styles from './ProductCard.module.css';
 
 export interface IProductCard {
   brand: string;
@@ -29,24 +28,54 @@ const ProductCard: React.FC<IProductCard> = ({
   vendor,
 }) => {
   return (
-    <div className={styles.cardContainer}>
-      <div className={styles.card}>
-        <div className={styles.cardImage}>
+    <div className="w-[300px] h-[490px] bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+      <a href={product_url} target="_blank" rel="noopener noreferrer">
+        <div className="flex justify-center">
           <Image
+            className="object-contain"
             src={image_url}
-            height={190}
-            width={270}
             alt={`${brand} ${title} coffee beans`}
-            objectFit="contain"
+            height={210}
+            width={270}
           />
         </div>
-        <div className={styles.cardInfoContainer}>
-          <div className={styles.soldBy}></div>
-          <div className={styles.brandPrice}>
-            <div className={styles.title}>
-              <div className={styles.extraInfo}></div>
-            </div>
-          </div>
+      </a>
+      <div className="m-4">
+        <p className="mb-1 text-xs text-gray-400 dark:text-gray-300">
+          Sold by {vendor}
+        </p>
+        <div className="mb-2 flex justify-between">
+          <p className="text-sm align-middle dark:text-gray-200">{brand}</p>
+          {sold_out ? (
+            <span className="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded-lg dark:bg-red-200 dark:text-red-900">
+              Sold Out
+            </span>
+          ) : (
+            <p className="align middle text-sm dark:text-gray-200">
+              ${price} for {weight}g
+            </p>
+          )}
+        </div>
+        <div>
+          <a href={product_url} target="_blank" rel="noopener noreferrer">
+            <p className="text-md mb-2 leading-5 font-semibold dark:text-gray-200">
+              {title}
+            </p>
+          </a>
+        </div>
+        <div>
+          <p className="text-xs text-gray-400 dark:text-gray-300">Country</p>
+          <p className="text-sm mb-2 dark:text-gray-200">{country}</p>
+        </div>
+        <div>
+          <p className="text-xs text-gray-400 dark:text-gray-300">Process</p>
+          <p className="text-sm mb-2 dark:text-gray-200">{process}</p>
+        </div>
+        <div>
+          <p className="text-xs text-gray-400 dark:text-gray-300">Variety</p>
+          <p className="text-sm mb-2 dark:text-gray-200">
+            {variety.join(', ')}
+          </p>
         </div>
       </div>
     </div>

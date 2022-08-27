@@ -28,7 +28,7 @@ const ProductCard: React.FC<IProductCard> = ({
   vendor,
 }) => {
   return (
-    <div className="w-[300px] h-[490px] bg-white rounded-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+    <div className="w-80 h-[490px] bg-white rounded-lg dark:bg-gray-800">
       <a href={product_url} target="_blank" rel="noopener noreferrer">
         <div className="flex justify-center">
           <Image

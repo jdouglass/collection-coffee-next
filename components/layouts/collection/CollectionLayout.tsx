@@ -1,20 +1,20 @@
 import Head from 'next/head';
 import Header from '../../navigation/header/Header';
 
-export interface IPrimaryLayout {}
+export interface ICollectionLayout {}
 
-const PrimaryLayout: React.FC<IPrimaryLayout> = ({ children }: any) => {
+const CollectionLayout: React.FC<ICollectionLayout> = ({ children }: any) => {
   return (
     <>
       <Head>
         <title>Collection Coffee</title>
       </Head>
       <Header />
-      <div className="flex flex-col">
+      <div className="flex flex-col items-center">
         <main>{children}</main>
       </div>
     </>
   );
 };
 
-export default PrimaryLayout;
+export default CollectionLayout;

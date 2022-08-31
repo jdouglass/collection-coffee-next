@@ -1,22 +1,20 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import SortSelect, { ISortSelect } from './SortSelect';
-import { mockFilterCategoryProps } from './SortSelect.mocks';
+import Header, { IHeader } from './Header';
+import { mockHeaderProps } from './Header.mocks';
 
 export default {
-  title: 'filters/SortSelect',
-  component: SortSelect,
+  title: 'navigation/Header',
+  component: Header,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},
-} as ComponentMeta<typeof SortSelect>;
+} as ComponentMeta<typeof Header>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof SortSelect> = (args) => (
-  <SortSelect {...args} />
-);
+const Template: ComponentStory<typeof Header> = (args) => <Header {...args} />;
 
 export const Base = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 
 Base.args = {
-  ...mockFilterCategoryProps.base,
-} as ISortSelect;
+  ...mockHeaderProps.base,
+} as IHeader;

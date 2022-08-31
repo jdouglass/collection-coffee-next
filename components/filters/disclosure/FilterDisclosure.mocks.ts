@@ -12,6 +12,7 @@ const base: IFilterDisclosure = {
     'Typica',
     'Sumatra',
     'Ruiru 11',
+    'Ethiopian Landraces',
   ],
 };
 

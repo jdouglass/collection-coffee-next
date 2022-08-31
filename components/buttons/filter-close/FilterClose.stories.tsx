@@ -1,22 +1,22 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import SortSelect, { ISortSelect } from './SortSelect';
-import { mockFilterCategoryProps } from './SortSelect.mocks';
+import FilterClose, { IFilterClose } from './FilterClose';
+import { mockFilterCloseProps } from './FilterClose.mocks';
 
 export default {
-  title: 'filters/SortSelect',
-  component: SortSelect,
+  title: 'buttons/FilterClose',
+  component: FilterClose,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},
-} as ComponentMeta<typeof SortSelect>;
+} as ComponentMeta<typeof FilterClose>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof SortSelect> = (args) => (
-  <SortSelect {...args} />
+const Template: ComponentStory<typeof FilterClose> = (args) => (
+  <FilterClose {...args} />
 );
 
 export const Base = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 
 Base.args = {
-  ...mockFilterCategoryProps.base,
-} as ISortSelect;
+  ...mockFilterCloseProps.base,
+} as IFilterClose;

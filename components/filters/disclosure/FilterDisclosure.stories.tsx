@@ -3,7 +3,7 @@ import FilterDisclosure, { IFilterDisclosure } from './FilterDisclosure';
 import { mockFilterDisclosureProps } from './FilterDisclosure.mocks';
 
 export default {
-  title: 'templates/FilterDisclosure',
+  title: 'filters/FilterDisclosure',
   component: FilterDisclosure,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},

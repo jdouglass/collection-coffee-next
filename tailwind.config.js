@@ -12,6 +12,11 @@ module.exports = {
       lg: '1200px',
       xl: '1536px',
     },
+    extend: {
+      backgroundImage: {
+        'chevron-down': "url('/public/icons/chevron-down.svg')",
+      },
+    },
   },
   plugins: [require('@tailwindcss/forms')],
 };

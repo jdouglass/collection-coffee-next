@@ -27,4 +27,6 @@ Collection.getLayout = function getLayout(page: ReactElement) {
   return <PrimaryLayout>{page}</PrimaryLayout>;
 };
 
+// export async function getServerSideProps() {}
+
 export default Collection;

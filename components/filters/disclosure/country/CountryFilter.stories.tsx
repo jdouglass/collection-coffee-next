@@ -1,22 +1,22 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import FilterClose, { IFilterClose } from './FilterClose';
-import { mockFilterCloseProps } from './FilterClose.mocks';
+import CountryFilter, { ICountryFilter } from './CountryFilter';
+import { mockCountryFilterProps } from './CountryFilter.mocks';
 
 export default {
-  title: 'buttons/FilterClose',
-  component: FilterClose,
+  title: 'filters/CountryFilter',
+  component: CountryFilter,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},
-} as ComponentMeta<typeof FilterClose>;
+} as ComponentMeta<typeof CountryFilter>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof FilterClose> = (args) => (
-  <FilterClose {...args} />
+const Template: ComponentStory<typeof CountryFilter> = (args) => (
+  <CountryFilter {...args} />
 );
 
 export const Base = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 
 Base.args = {
-  ...mockFilterCloseProps.base,
-} as IFilterClose;
+  ...mockCountryFilterProps.base,
+} as ICountryFilter;

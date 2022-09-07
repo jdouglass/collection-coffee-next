@@ -10,8 +10,7 @@ const SortSelect: React.FC<ISortSelect> = () => {
     'Price Ascending',
     'Price Descending',
   ];
-  const [sortBy, setSortBy] = useAtom(initialSort);
-  console.log(sortBy);
+  const [, setSortBy] = useAtom(initialSort);
 
   return (
     <select

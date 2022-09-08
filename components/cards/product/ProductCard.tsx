@@ -7,12 +7,14 @@ export interface IProductCard {
   price: string;
   weight: number;
   process: string;
-  variety: Array<string>;
+  variety: string[];
   country: string;
   product_url: string;
   image_url: string;
   sold_out: boolean;
+  date_added: Date;
   vendor: string;
+  handle: string;
 }
 
 const ProductCard: React.FC<IProductCard> = ({

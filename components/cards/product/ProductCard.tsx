@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 
 export interface IProductCard {
   brand: string;
@@ -31,18 +30,20 @@ const ProductCard: React.FC<IProductCard> = ({
   vendor,
 }) => {
   return (
-    <div className="w-80 h-[490px] bg-white dark:bg-gray-800">
-      <Link href={product_url} target="_blank" rel="noopener noreferrer">
+    <div className="w-80 h-[490px] bg-white dark:bg-gray-800 ">
+      <a href={product_url} target="_blank" rel="noopener noreferrer">
         <div className="flex justify-center">
           <Image
-            className="object-contain hover:cursor-pointer"
+            className={`${
+              brand === 'Monogram' ? 'object-contain' : 'object-cover'
+            } hover:cursor-pointer rounded-lg`}
             src={image_url}
             alt={`${brand} ${title} coffee beans`}
-            height={210}
-            width={270}
+            height={260}
+            width={300}
           />
         </div>
-      </Link>
+      </a>
       <div className="m-4">
         <p className="mb-1 text-xs text-gray-400 dark:text-gray-300">
           Sold by {vendor}
@@ -60,11 +61,11 @@ const ProductCard: React.FC<IProductCard> = ({
           )}
         </div>
         <div>
-          <Link href={product_url} target="_blank" rel="noopener noreferrer">
+          <a href={product_url} target="_blank" rel="noopener noreferrer">
             <p className="text-md mb-2 leading-5 font-semibold dark:text-gray-200 hover:cursor-pointer">
               {title}
             </p>
-          </Link>
+          </a>
         </div>
         <div>
           <p className="text-xs text-gray-400 dark:text-gray-300">Country</p>

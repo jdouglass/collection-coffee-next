@@ -16,7 +16,7 @@ export function Collection({ products }: any) {
       <div className="flex">
         <FilterBar {...mockFilterBarProps.base} />
         <div className="flex grow">
-          <div className="grid grid-cols-4 place-items-center pt-4 basis-full content-start">
+          <div className="grid grid-cols-4 gap-y-7 place-items-center pt-4 basis-full content-start">
             {products.map((product: any) => {
               return <ProductCard key={product.id} {...product} />;
             })}
@@ -32,7 +32,13 @@ Collection.getLayout = function getLayout(page: ReactElement) {
 };
 
 export async function getServerSideProps() {
-  const response = await prisma.products.findMany();
+  const response = await prisma.products.findMany({
+    orderBy: [
+      {
+        date_added: 'desc',
+      },
+    ],
+  });
   return {
     props: {
       products: JSON.parse(JSON.stringify(response)),

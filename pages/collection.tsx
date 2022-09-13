@@ -1,20 +1,20 @@
+import { GetServerSidePropsContext } from 'next';
 import { ReactElement } from 'react';
 import ProductCard from '../components/cards/product/ProductCard';
 import PrimaryLayout from '../components/layouts/primary/PrimaryLayout';
 import FilterBar from '../components/utility/filter-bar/FilterBar';
-import { mockFilterBarProps } from '../components/utility/filter-bar/FilterBar.mocks';
+import { IProduct } from '../lib/IProduct';
 import { prisma } from '../lib/prisma';
-import { Product } from '../lib/Product';
 
-export interface ProductProps {
-  products: Product[];
+export interface IProductProps {
+  products: IProduct[];
 }
 
-export function Collection({ products }: any) {
+export function Collection({ products }: IProductProps) {
   return (
     <>
       <div className="flex">
-        <FilterBar {...mockFilterBarProps.base} />
+        <FilterBar products={products} />
         <div className="flex grow">
           <div className="grid grid-cols-4 gap-y-7 place-items-center pt-4 basis-full content-start">
             {products.map((product: any) => {
@@ -31,7 +31,8 @@ Collection.getLayout = function getLayout(page: ReactElement) {
   return <PrimaryLayout>{page}</PrimaryLayout>;
 };
 
-export async function getServerSideProps() {
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  console.log(context);
   const response = await prisma.products.findMany({
     orderBy: [
       {

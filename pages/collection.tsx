@@ -13,7 +13,7 @@ export interface IProductProps {
 export function Collection({ products }: IProductProps) {
   return (
     <>
-      <div className="flex">
+      <div className="flex overflow-y-scroll h-[calc(100vh-80px)]">
         <FilterBar products={products} />
         <div className="flex grow">
           <div className="grid grid-cols-4 gap-y-7 place-items-center pt-4 basis-full content-start">

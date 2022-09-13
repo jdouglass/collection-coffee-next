@@ -8,10 +8,12 @@ const Header: React.FC<IHeader> = () => {
     <nav className="h-20 border-b">
       <div className="grid grid-cols-3 h-20 items-center px-4">
         <div className="flex shrink-0">
-          <Logo
-            className="h-12 hover:cursor-pointer"
-            alt="Collection Coffee logo"
-          />
+          <Link href="/">
+            <Logo
+              className="h-12 hover:cursor-pointer"
+              alt="Collection Coffee logo"
+            />
+          </Link>
         </div>
         <div className="flex text-sm text-black font-semibold space-x-14 justify-center">
           <Link href="/collection">

@@ -1,7 +1,4 @@
-import CountryFilter from '../../filters/disclosure/country/CountryFilter';
-import ProcessFilter from '../../filters/disclosure/process/ProcessFilter';
-import VarietyFilter from '../../filters/disclosure/variety/VarietyFilter';
-import VendorFilter from '../../filters/disclosure/vendor/VendorFilter';
+import FilterDisclosure from '../../filters/disclosure/base/FilterDisclosure';
 import SortSelect from '../../filters/select/sort/SortSelect';
 
 export interface IFilterBar {
@@ -41,16 +38,16 @@ const FilterBar: React.FC<IFilterBar> = ({ products }: any) => {
         <SortSelect />
       </div>
       <div className="pt-4 px-4">
-        <VendorFilter options={uniqueVendorList} />
+        <FilterDisclosure section="Vendor" options={uniqueVendorList} />
       </div>
       <div className="pt-4 px-4">
-        <ProcessFilter options={uniqueProcessList} />
+        <FilterDisclosure section="Process" options={uniqueProcessList} />
       </div>
       <div className="pt-4 px-4">
-        <CountryFilter options={uniqueCountryList} />
+        <FilterDisclosure section="Country" options={uniqueCountryList} />
       </div>
       <div className="pt-4 px-4">
-        <VarietyFilter options={uniqueVarietyList} />
+        <FilterDisclosure section="Variety" options={uniqueVarietyList} />
       </div>
     </section>
   );

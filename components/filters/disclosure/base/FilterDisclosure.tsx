@@ -1,6 +1,7 @@
 import { Disclosure } from '@headlessui/react';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
-import ChevronDownIcon from '../../../public/icons/chevron-down.svg';
+import ChevronDownIcon from '../../../../public/icons/chevron-down.svg';
 
 export interface IFilterDisclosure {
   section: string;
@@ -11,14 +12,30 @@ const FilterDisclosure: React.FC<IFilterDisclosure> = ({
   section,
   options,
 }) => {
-  const [selected, setSelected] = useState<any>([]);
+  const router = useRouter();
+  const { pathname, query } = router;
+  const initialVendorParams = Array.isArray(query[section])
+    ? query[section]
+    : query[section]
+    ? [query[section]]
+    : [];
+  const [selected, setSelected]: any[] = useState(initialVendorParams);
   const handleSelectedChange = (e: any) => {
-    if (e.target.value) {
-      if (!selected.includes(e.target.value)) {
-        setSelected([...selected, e.target.value]);
-      } else {
-        setSelected(selected.filter((item: string) => item !== e.target.value));
-      }
+    if (!selected.includes(e.target.value)) {
+      setSelected([...selected, e.target.value]);
+      router.push({
+        pathname,
+        query: { ...query, [section]: [...selected, e.target.value] },
+      });
+    } else {
+      setSelected(selected.filter((item: string) => item !== e.target.value));
+      router.push({
+        pathname,
+        query: {
+          ...query,
+          [section]: selected.filter((item: string) => item !== e.target.value),
+        },
+      });
     }
   };
 
@@ -49,6 +66,7 @@ const FilterDisclosure: React.FC<IFilterDisclosure> = ({
                         name={option}
                         className="h-4 w-4 pr-2 border-gray-300 rounded text-indigo-600 hover:cursor-pointer focus:ring-0 focus:ring-offset-0"
                         onChange={(e) => handleSelectedChange(e)}
+                        defaultChecked={selected.includes(option)}
                       />
                       <label
                         htmlFor={option}

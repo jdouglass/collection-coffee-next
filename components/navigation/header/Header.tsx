@@ -9,10 +9,12 @@ const Header: React.FC<IHeader> = () => {
       <div className="grid grid-cols-3 h-20 items-center px-4">
         <div className="flex shrink-0">
           <Link href="/">
-            <Logo
-              className="h-12 hover:cursor-pointer"
-              alt="Collection Coffee logo"
-            />
+            <a>
+              <Logo
+                className="h-12 hover:cursor-pointer"
+                alt="Collection Coffee logo"
+              />
+            </a>
           </Link>
         </div>
         <div className="flex text-sm text-black font-semibold space-x-14 justify-center">

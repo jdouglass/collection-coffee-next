@@ -1,26 +1,34 @@
-import { useAtom } from 'jotai';
-import { initialSort } from '../../../../lib/atom';
+import { useRouter } from 'next/router';
 
 export interface ISortSelect {}
 
 const SortSelect: React.FC<ISortSelect> = () => {
+  const router = useRouter();
+  const { pathname, query } = router;
   const sortOptions = [
-    'Newest to Oldest',
-    'Oldest to Newest',
-    'Price Ascending',
-    'Price Descending',
+    { value: 'newest', label: 'Newest to Oldest' },
+    { value: 'oldest', label: 'Oldest to Newest' },
+    { value: 'ascending', label: 'Price Ascending' },
+    { value: 'descending', label: 'Price Descending' },
   ];
-  const [, setSortBy] = useAtom(initialSort);
+
+  const handleSort = (e: any) => {
+    router.push({
+      pathname,
+      query: { sort: e.currentTarget.value },
+    });
+  };
 
   return (
     <select
-      onChange={(e) => setSortBy(e.currentTarget.value)}
+      defaultValue={query.sort}
+      onChange={(e) => handleSort(e)}
       className="w-full appearance-none text-sm font-semibold drop-shadow-sm rounded border-gray-300 py-2 mb-2 hover:cursor-pointer focus:outline-none focus:ring-0 focus:border-gray-300"
     >
       {sortOptions.map((sortOption) => {
         return (
-          <option key={sortOption} value={sortOption}>
-            {sortOption}
+          <option key={sortOption.value} value={sortOption.value}>
+            {sortOption.label}
           </option>
         );
       })}

@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client';
 import { GetServerSidePropsContext } from 'next';
 import { ReactElement } from 'react';
 import ProductCard from '../components/cards/product/ProductCard';
@@ -32,13 +33,44 @@ Collection.getLayout = function getLayout(page: ReactElement) {
 };
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  console.log(context);
+  const { query } = context;
+
+  type OrderByDate = {
+    date_added: string;
+  };
+
+  type OrderByPrice = {
+    price: string;
+  };
+
+  const orderByQuery =
+    query.sort === 'newest'
+      ? Prisma.validator<OrderByDate>()({ date_added: 'desc' })
+      : query.sort === 'oldest'
+      ? Prisma.validator<OrderByDate>()({ date_added: 'asc' })
+      : query.sort === 'descending'
+      ? Prisma.validator<OrderByPrice>()({ price: 'desc' })
+      : query.sort === 'ascending'
+      ? Prisma.validator<OrderByPrice>()({ price: 'asc' })
+      : Prisma.validator<OrderByDate>()({ date_added: 'desc' });
+
   const response = await prisma.products.findMany({
-    orderBy: [
-      {
-        date_added: 'desc',
-      },
-    ],
+    where: {
+      AND: [
+        {
+          vendor: {
+            in: query.Vendor,
+          },
+          process_category: {
+            in: query.Process,
+          },
+          country: {
+            in: query.Country,
+          },
+        },
+      ],
+    },
+    orderBy: [orderByQuery],
   });
   return {
     props: {

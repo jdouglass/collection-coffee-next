@@ -33,8 +33,6 @@ Collection.getLayout = function getLayout(page: ReactElement) {
 };
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
-  const { query } = context;
-
   type OrderByDate = {
     date_added: string;
   };
@@ -43,6 +41,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     price: string;
   };
 
+  const { query } = context;
   const orderByQuery =
     query.sort === 'newest'
       ? Prisma.validator<OrderByDate>()({ date_added: 'desc' })
@@ -53,6 +52,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
       : query.sort === 'ascending'
       ? Prisma.validator<OrderByPrice>()({ price: 'asc' })
       : Prisma.validator<OrderByDate>()({ date_added: 'desc' });
+
+  const variety = query.Variety
+    ? Prisma.validator<Prisma.StringNullableListFilter>()({
+        hasSome: query.Variety,
+      })
+    : undefined;
 
   const response = await prisma.products.findMany({
     where: {
@@ -67,6 +72,7 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
           country: {
             in: query.Country,
           },
+          variety,
         },
       ],
     },

@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Header from '../../navigation/header/Header';
+import FilterBar from '../../utility/filter-bar/FilterBar';
 
 export interface ICollectionLayout {}
 
@@ -10,7 +11,8 @@ const CollectionLayout: React.FC<ICollectionLayout> = ({ children }: any) => {
         <title>Collection Coffee</title>
       </Head>
       <Header />
-      <div className="flex flex-col items-center">
+      <div className="flex overflow-y-scroll h-[calc(100vh-80px)] justify-center">
+        <FilterBar />
         <main>{children}</main>
       </div>
     </>

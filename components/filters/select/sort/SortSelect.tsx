@@ -15,7 +15,7 @@ const SortSelect: React.FC<ISortSelect> = () => {
   const handleSort = (e: any) => {
     router.push({
       pathname,
-      query: { sort: e.currentTarget.value },
+      query: { ...query, sort: e.currentTarget.value },
     });
   };
 

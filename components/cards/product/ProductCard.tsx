@@ -35,7 +35,9 @@ const ProductCard: React.FC<IProductCard> = ({
         <div className="flex justify-center">
           <Image
             className={`${
-              vendor === 'Monogram' ? 'object-contain' : 'object-cover'
+              vendor === 'Monogram' && brand === 'Monogram'
+                ? 'object-contain'
+                : 'object-cover'
             } hover:cursor-pointer rounded-lg`}
             src={image_url}
             alt={`${brand} ${title} coffee beans`}

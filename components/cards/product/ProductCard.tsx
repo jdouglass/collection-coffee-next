@@ -43,6 +43,8 @@ const ProductCard: React.FC<IProductCard> = ({
             alt={`${brand} ${title} coffee beans`}
             height={260}
             width={300}
+            blurDataURL={image_url}
+            placeholder="blur"
           />
         </div>
       </a>

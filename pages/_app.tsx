@@ -1,5 +1,5 @@
 import { NextPage } from 'next';
-import type { AppProps } from 'next/app';
+import type { AppProps, NextWebVitalsMetric } from 'next/app';
 import { ReactElement, ReactNode } from 'react';
 import '../pages/globals.css';
 
@@ -16,4 +16,8 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page): any => page);
 
   return getLayout(<Component {...pageProps} />);
+}
+
+export function reportWebVitals(metric: NextWebVitalsMetric) {
+  console.log(metric);
 }

@@ -74,6 +74,12 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
     },
     orderBy: [orderByQuery],
   });
+
+  context.res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=10, stale-while-revalidate=59'
+  );
+
   return {
     props: {
       products: JSON.parse(JSON.stringify(response)),

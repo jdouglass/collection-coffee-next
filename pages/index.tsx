@@ -3,6 +3,9 @@ import { useRouter } from 'next/router';
 import { ReactElement, useState } from 'react';
 import useSWRInfinite from 'swr/infinite';
 import ProductCard from '../components/cards/product/ProductCard';
+import SkeletonProductCard, {
+  ISkeletonProductCard,
+} from '../components/cards/skeleton/SkeletonProductCard';
 import CollectionLayout from '../components/layouts/collection/CollectionLayout';
 import { IProduct } from '../lib/IProduct';
 
@@ -12,7 +15,6 @@ export interface IProductProps {
 
 export function Collection() {
   const [isAtTheEnd, setIsAtTheEnd] = useState<boolean>(false);
-  console.log(isAtTheEnd);
   const router = useRouter();
   const fetcher = (url: string) => axios.get(url).then((res) => res.data);
   const getKey = (pageIndex: number, previousPageData: any) => {
@@ -43,6 +45,23 @@ export function Collection() {
   );
 
   if (error) return <div>failed to load</div>;
+  if (size === 1 && !data) {
+    const limit = 12;
+    const skeletonCards: ISkeletonProductCard[] = [];
+    for (let i = 0; i < limit; i++) {
+      skeletonCards.push(<SkeletonProductCard />);
+    }
+    return (
+      <div className="flex grow">
+        <div className="grid grid-cols-4 gap-y-7 place-items-center pt-4 basis-full content-start">
+          {skeletonCards.map((card: ISkeletonProductCard) => {
+            // eslint-disable-next-line react/jsx-key
+            return <SkeletonProductCard />;
+          })}
+        </div>
+      </div>
+    );
+  }
   if (!data) return <div>loading...</div>;
 
   return (

@@ -1,25 +1,65 @@
-import { Prisma } from '@prisma/client';
-import { GetServerSidePropsContext } from 'next';
-import { ReactElement } from 'react';
+import axios from 'axios';
+import { useRouter } from 'next/router';
+import { ReactElement, useState } from 'react';
+import useSWRInfinite from 'swr/infinite';
 import ProductCard from '../components/cards/product/ProductCard';
 import CollectionLayout from '../components/layouts/collection/CollectionLayout';
 import { IProduct } from '../lib/IProduct';
-import { prisma } from '../lib/prisma';
 
 export interface IProductProps {
   products: IProduct[];
 }
 
-export function Collection({ products }: IProductProps) {
+export function Collection() {
+  const [isAtTheEnd, setIsAtTheEnd] = useState<boolean>(false);
+  console.log(isAtTheEnd);
+  const router = useRouter();
+  const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+  const getKey = (pageIndex: number, previousPageData: any) => {
+    let lastId: number | string = '';
+
+    // reached the end
+    if (pageIndex >= 1 && previousPageData.length === 0) {
+      setIsAtTheEnd(true);
+      return null;
+    }
+
+    // first page, we don't have `previousPageData`
+    if (pageIndex === 0) {
+      return `/api/products${router.asPath}`;
+    } else {
+      lastId = previousPageData[previousPageData.length - 1].id;
+    }
+
+    // add the cursor to the API endpoint
+    if (router.asPath !== '/') {
+      return `/api/products${router.asPath}&cursor=${lastId}`;
+    }
+    return `/api/products?cursor=${lastId}`;
+  };
+  const { data, size, setSize, error } = useSWRInfinite<IProduct[]>(
+    getKey,
+    fetcher
+  );
+
+  if (error) return <div>failed to load</div>;
+  if (!data) return <div>loading...</div>;
+
   return (
     <>
       <div className="flex grow">
         <div className="grid grid-cols-4 gap-y-7 place-items-center pt-4 basis-full content-start">
-          {products.map((product: any) => {
+          {data.flat(1).map((product: any) => {
             return <ProductCard key={product.id} {...product} />;
           })}
         </div>
       </div>
+      <button
+        className={isAtTheEnd ? 'invisible' : ''}
+        onClick={() => setSize(size + 1)}
+      >
+        Load more
+      </button>
     </>
   );
 }
@@ -27,64 +67,5 @@ export function Collection({ products }: IProductProps) {
 Collection.getLayout = function getLayout(page: ReactElement) {
   return <CollectionLayout>{page}</CollectionLayout>;
 };
-
-export async function getServerSideProps(context: GetServerSidePropsContext) {
-  type OrderByDate = {
-    date_added: string;
-  };
-
-  type OrderByPrice = {
-    price: string;
-  };
-
-  const { query } = context;
-  const orderByQuery =
-    query.sort === 'newest'
-      ? Prisma.validator<OrderByDate>()({ date_added: 'desc' })
-      : query.sort === 'oldest'
-      ? Prisma.validator<OrderByDate>()({ date_added: 'asc' })
-      : query.sort === 'descending'
-      ? Prisma.validator<OrderByPrice>()({ price: 'desc' })
-      : query.sort === 'ascending'
-      ? Prisma.validator<OrderByPrice>()({ price: 'asc' })
-      : Prisma.validator<OrderByDate>()({ date_added: 'desc' });
-
-  const variety = query.Variety
-    ? Prisma.validator<Prisma.StringNullableListFilter>()({
-        hasSome: query.Variety,
-      })
-    : undefined;
-
-  const response = await prisma.products.findMany({
-    where: {
-      AND: [
-        {
-          vendor: {
-            in: query.Vendor,
-          },
-          process_category: {
-            in: query.Process,
-          },
-          country: {
-            in: query.Country,
-          },
-          variety,
-        },
-      ],
-    },
-    orderBy: [orderByQuery],
-  });
-
-  context.res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=10, stale-while-revalidate=59'
-  );
-
-  return {
-    props: {
-      products: JSON.parse(JSON.stringify(response)),
-    },
-  };
-}
 
 export default Collection;

@@ -3,6 +3,7 @@ export interface IProduct {
   brand: string;
   title: string;
   weight: number;
+  price: string;
   process: string;
   variety: string[];
   country: string;

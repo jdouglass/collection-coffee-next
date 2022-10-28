@@ -79,7 +79,9 @@ const ProductCard: React.FC<IProductCard> = ({
         </div>
         <div>
           <p className="text-xs text-gray-400">Variety</p>
-          <p className="text-sm mb-2">{variety.join(', ')}</p>
+          <p className="text-sm mb-2">
+            {variety ? variety.join(', ') : 'Unknown'}
+          </p>
         </div>
       </div>
     </div>

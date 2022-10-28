@@ -54,7 +54,7 @@ export function Collection() {
     return (
       <div className="flex grow">
         <div className="grid grid-cols-4 gap-y-7 place-items-center pt-4 basis-full content-start">
-          {skeletonCards.map((card: ISkeletonProductCard) => {
+          {skeletonCards.map(() => {
             // eslint-disable-next-line react/jsx-key
             return <SkeletonProductCard />;
           })}

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useRouter } from 'next/router';
-import { ReactElement, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 import useSWRInfinite from 'swr/infinite';
 import ProductCard from '../components/cards/product/ProductCard';
 import SkeletonProductCard, {
@@ -16,7 +17,9 @@ export interface IProductProps {
 export function Collection() {
   const [isAtTheEnd, setIsAtTheEnd] = useState<boolean>(false);
   const router = useRouter();
+  const { ref, inView } = useInView();
   const fetcher = (url: string) => axios.get(url).then((res) => res.data);
+
   const getKey = (pageIndex: number, previousPageData: any) => {
     let lastId: number | string = '';
 
@@ -39,13 +42,21 @@ export function Collection() {
     }
     return `/api/products?cursor=${lastId}`;
   };
+
   const { data, size, setSize, error } = useSWRInfinite<IProduct[]>(
     getKey,
     fetcher
   );
 
-  if (error) return <div>failed to load</div>;
-  if (size === 1 && !data) {
+  useEffect(() => {
+    if (!isAtTheEnd && inView) {
+      setSize(size + 1);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView]);
+
+  if (error) return <div>Failed to load</div>;
+  if (!data) {
     const limit = 12;
     const skeletonCards: ISkeletonProductCard[] = [];
     for (let i = 0; i < limit; i++) {
@@ -54,15 +65,14 @@ export function Collection() {
     return (
       <div className="flex grow">
         <div className="grid grid-cols-4 gap-y-7 place-items-center pt-4 basis-full content-start">
-          {skeletonCards.map(() => {
+          {skeletonCards.map((_card: ISkeletonProductCard, index: number) => {
             // eslint-disable-next-line react/jsx-key
-            return <SkeletonProductCard />;
+            return <SkeletonProductCard key={index} />;
           })}
         </div>
       </div>
     );
   }
-  if (!data) return <div>loading...</div>;
 
   return (
     <>
@@ -73,12 +83,9 @@ export function Collection() {
           })}
         </div>
       </div>
-      <button
-        className={isAtTheEnd ? 'invisible' : ''}
-        onClick={() => setSize(size + 1)}
-      >
-        Load more
-      </button>
+      <span className="invisible" ref={ref}>
+        Intersection Observer Marker
+      </span>
     </>
   );
 }

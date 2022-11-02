@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-import FilterDisclosure from '../../filters/disclosure/base/FilterDisclosure';
+import FilterDisclosure from '../../../filters/disclosure/base/FilterDisclosure';
 
-export interface IFilterBar {}
+export interface IFilterBarMobile {}
 
-const FilterBar: React.FC<IFilterBar> = () => {
+const FilterBarMobile: React.FC<IFilterBarMobile> = () => {
   const [vendorOptions, setVendorOptions] = useState<any>([]);
   const [processCategoryOptions, setProcessCategoryOptions] = useState<any>([]);
   const [countryOptions, setCountryOptions] = useState<any>([]);
@@ -54,7 +54,7 @@ const FilterBar: React.FC<IFilterBar> = () => {
   }, []);
 
   return (
-    <section className="h-[calc(100vh-36px)] sticky bg-white overflow-auto top-9 w-72 hidden lg:block">
+    <section className="overflow-auto full">
       {isLoading ? (
         <p>Loading filters...</p>
       ) : (
@@ -80,4 +80,4 @@ const FilterBar: React.FC<IFilterBar> = () => {
   );
 };
 
-export default FilterBar;
+export default FilterBarMobile;

@@ -20,19 +20,22 @@ const SortSelect: React.FC<ISortSelect> = () => {
   };
 
   return (
-    <select
-      defaultValue={query.sort}
-      onChange={(e) => handleSort(e)}
-      className="w-full appearance-none text-sm font-semibold drop-shadow-sm rounded border-gray-300 py-2 mb-2 hover:cursor-pointer focus:outline-none focus:ring-0 focus:border-gray-300"
-    >
-      {sortOptions.map((sortOption) => {
-        return (
-          <option key={sortOption.value} value={sortOption.value}>
-            {sortOption.label}
-          </option>
-        );
-      })}
-    </select>
+    <div className="flex items-center">
+      <p className="text-sm font-semibold text-gray-800">Sort:</p>
+      <select
+        defaultValue={query.sort}
+        onChange={(e) => handleSort(e)}
+        className="w-full text-gray-800 hover:text-gray-900 appearance-none text-sm font-semibold border-none hover:cursor-pointer focus:outline-none focus:ring-0"
+      >
+        {sortOptions.map((sortOption) => {
+          return (
+            <option key={sortOption.value} value={sortOption.value}>
+              {sortOption.label}
+            </option>
+          );
+        })}
+      </select>
+    </div>
   );
 };
 

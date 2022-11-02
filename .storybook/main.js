@@ -7,6 +7,7 @@ module.exports = {
     '@storybook/addon-interactions',
     'storybook-css-modules-preset',
     'storybook-tailwind-dark-mode',
+    'storybook-addon-next-router',
     {
       name: '@storybook/addon-postcss',
       options: {

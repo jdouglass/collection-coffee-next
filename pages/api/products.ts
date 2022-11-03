@@ -54,7 +54,7 @@ export default async function fetchProducts(
     const cursorObj =
       cursor === '' ? undefined : { id: parseInt(cursor as string, 10) };
 
-    const productsResponse: IProductsDb[] = await prisma.products.findMany({
+    const productsResponse = await prisma.products.findMany({
       skip: cursor !== '' ? 1 : 0,
       cursor: cursorObj,
       take: limit,

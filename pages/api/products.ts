@@ -16,22 +16,6 @@ export default async function fetchProducts(
       price: string;
     };
 
-    type IProductsDb = {
-      id: number;
-      brand: string;
-      title: string;
-      weight: number;
-      price: Prisma.Decimal;
-      process: string;
-      variety: string[];
-      country: string;
-      product_url: string;
-      image_url: string;
-      sold_out: boolean;
-      date_added: Date;
-      vendor: string;
-      handle: string;
-    };
     const orderByQuery =
       req.query.sort === 'newest'
         ? Prisma.validator<OrderByDate>()({ date_added: 'desc' })

@@ -15,6 +15,23 @@ export default async function fetchProducts(
     type OrderByPrice = {
       price: string;
     };
+
+    type IProductsDb = {
+      id: number;
+      brand: string;
+      title: string;
+      weight: number;
+      price: Prisma.Decimal;
+      process: string;
+      variety: string[];
+      country: string;
+      product_url: string;
+      image_url: string;
+      sold_out: boolean;
+      date_added: Date;
+      vendor: string;
+      handle: string;
+    };
     const orderByQuery =
       req.query.sort === 'newest'
         ? Prisma.validator<OrderByDate>()({ date_added: 'desc' })
@@ -37,7 +54,7 @@ export default async function fetchProducts(
     const cursorObj =
       cursor === '' ? undefined : { id: parseInt(cursor as string, 10) };
 
-    const products: IProduct[] = await prisma.products.findMany({
+    const productsResponse: IProductsDb[] = await prisma.products.findMany({
       skip: cursor !== '' ? 1 : 0,
       cursor: cursorObj,
       take: limit,
@@ -59,6 +76,27 @@ export default async function fetchProducts(
       },
       orderBy: [orderByQuery],
     });
+
+    let products: Array<IProduct> = [];
+    for (const product of productsResponse) {
+      const addedProduct: IProduct = {
+        id: product.id,
+        brand: product.brand,
+        title: product.title,
+        weight: product.weight,
+        price: Number(product.price),
+        process: product.process,
+        variety: product.variety,
+        country: product.country,
+        product_url: product.product_url,
+        image_url: product.image_url,
+        sold_out: product.sold_out,
+        date_added: product.date_added,
+        vendor: product.vendor,
+        handle: product.handle,
+      };
+      products.push(addedProduct);
+    }
 
     return res.status(200).json(products);
   }

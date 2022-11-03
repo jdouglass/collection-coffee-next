@@ -84,7 +84,7 @@ export default async function fetchProducts(
         brand: product.brand,
         title: product.title,
         weight: product.weight,
-        price: Number(product.price),
+        price: product.price.toFixed(2),
         process: product.process,
         variety: product.variety,
         country: product.country,

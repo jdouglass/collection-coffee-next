@@ -14,7 +14,7 @@ export interface IProductProps {
   products: IProduct[];
 }
 
-export function Collection() {
+export function Collection(props: any) {
   const [isAtTheEnd, setIsAtTheEnd] = useState<boolean>(false);
   const router = useRouter();
   const { ref, inView } = useInView();
@@ -93,5 +93,13 @@ export function Collection() {
 Collection.getLayout = function getLayout(page: ReactElement) {
   return <CollectionLayout>{page}</CollectionLayout>;
 };
+
+export async function getServerSideProps(context: any) {
+  return {
+    props: {
+      query: context.query,
+    },
+  };
+}
 
 export default Collection;

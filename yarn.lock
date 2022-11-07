@@ -7089,10 +7089,10 @@ jest-worker@^27.4.5:
     merge-stream "^2.0.0"
     supports-color "^8.0.0"
 
-jotai@^1.8.1:
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/jotai/-/jotai-1.8.1.tgz#aa59c5c7c55a7b4392db1ebedd0f5dd076ee30ae"
-  integrity sha512-ZhZ15z+94E95aMYpH9MfwFFYP5m8TuFKkEN/6+3P4SC3dXnQc5s+DbMl+kA4RC63OcUlfi9C0nJU3YDnJfqLIg==
+jotai@^1.9.1:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/jotai/-/jotai-1.9.1.tgz#3a204cc7f8f72584dee61e28cceea9fc360c7407"
+  integrity sha512-rDmmDL6owX4Kg5fAV0arjGVJmT1VYnkROwAx/PgpMkYCzvHEtABm8qnq/Ki5o5/GFGbvdfE11VNP1brDWP7+9w==
 
 js-sha3@0.8.0:
   version "0.8.0"

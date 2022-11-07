@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
+import { FilterCategory } from '../../../lib/enums/filterCategory';
+import { processCategoryOptions } from '../../../lib/processCategory';
 import FilterDisclosure from '../../filters/disclosure/base/FilterDisclosure';
 
 export interface IFilterBar {}
 
 const FilterBar: React.FC<IFilterBar> = () => {
   const [vendorOptions, setVendorOptions] = useState<any>([]);
-  const [processCategoryOptions, setProcessCategoryOptions] = useState<any>([]);
   const [countryOptions, setCountryOptions] = useState<any>([]);
   const [varietyOptions, setVarietyOptions] = useState<any>([]);
   const [isLoading, setLoading] = useState<any>(false);
@@ -19,15 +20,6 @@ const FilterBar: React.FC<IFilterBar> = () => {
           (vendorElement: any) => vendorElement.vendor
         );
         setVendorOptions(vendorList);
-      });
-
-    fetch('/api/processCategoryList')
-      .then((res) => res.json())
-      .then((processCategoryResponse) => {
-        const processCategoryList: string[] = processCategoryResponse.map(
-          (processCategory: any) => processCategory.process_category
-        );
-        setProcessCategoryOptions(processCategoryList.sort());
       });
 
     fetch('/api/countryList')
@@ -60,19 +52,28 @@ const FilterBar: React.FC<IFilterBar> = () => {
       ) : (
         <>
           <div className="px-4">
-            <FilterDisclosure section="Vendor" options={vendorOptions} />
+            <FilterDisclosure
+              section={FilterCategory.Vendor}
+              options={vendorOptions}
+            />
           </div>
           <div className="px-4">
             <FilterDisclosure
-              section="Process"
+              section={FilterCategory.Process}
               options={processCategoryOptions}
             />
           </div>
           <div className="px-4">
-            <FilterDisclosure section="Country" options={countryOptions} />
+            <FilterDisclosure
+              section={FilterCategory.Country}
+              options={countryOptions}
+            />
           </div>
           <div className="px-4">
-            <FilterDisclosure section="Variety" options={varietyOptions} />
+            <FilterDisclosure
+              section={FilterCategory.Variety}
+              options={varietyOptions}
+            />
           </div>
         </>
       )}

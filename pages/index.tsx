@@ -14,7 +14,7 @@ export interface IProductProps {
   products: IProduct[];
 }
 
-export function Collection(props: any) {
+export function Collection() {
   const [isAtTheEnd, setIsAtTheEnd] = useState<boolean>(false);
   const router = useRouter();
   const { ref, inView } = useInView();

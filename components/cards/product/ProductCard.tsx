@@ -30,12 +30,14 @@ const ProductCard: React.FC<IProductCard> = ({
   vendor,
 }) => {
   return (
-    <div className="w-80 h-[490px] bg-white">
+    <div className="w-80 h-[490px] bg-white mb-5">
       <a href={product_url} target="_blank" rel="noopener noreferrer">
         <div className="flex justify-center">
           <Image
             className={`${
-              vendor === 'Monogram' && brand === 'Monogram'
+              brand === 'Monogram' ||
+              brand === 'Manhattan' ||
+              vendor === 'Pallet Coffee Roasters'
                 ? 'object-contain'
                 : 'object-cover'
             } hover:cursor-pointer rounded-lg`}
@@ -75,7 +77,7 @@ const ProductCard: React.FC<IProductCard> = ({
         </div>
         <div>
           <p className="text-xs text-gray-400">Process</p>
-          <p className="text-sm mb-2">{process}</p>
+          <p className="text-sm mb-2 truncate">{process}</p>
         </div>
         <div>
           <p className="text-xs text-gray-400">Variety</p>

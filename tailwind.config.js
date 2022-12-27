@@ -6,11 +6,13 @@ module.exports = {
   ],
   theme: {
     screens: {
-      xs: '375px',
-      sm: '600px',
-      md: '900px',
-      lg: '1200px',
-      xl: '1536px',
+      xs: '350px',
+      sm: '550px',
+      md: '750px',
+      lg: '1050px',
+      xl: '1350px',
+      '2xl': '1600px',
+      '3xl': '1950px',
     },
     extend: {
       backgroundImage: {

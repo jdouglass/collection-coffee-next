@@ -30,7 +30,7 @@ const ProductCard: React.FC<IProductCard> = ({
   vendor,
 }) => {
   return (
-    <div className="w-80 h-[490px] bg-white mb-5">
+    <div className="max-w-80 h-[490px] bg-white my-3 mx-3">
       <a href={product_url} target="_blank" rel="noopener noreferrer">
         <div className="flex justify-center">
           <Image
@@ -50,7 +50,7 @@ const ProductCard: React.FC<IProductCard> = ({
           />
         </div>
       </a>
-      <div className="m-4">
+      <div className="mx-2 my-2">
         <p className="mb-1 text-xs text-gray-400">Sold by {vendor}</p>
         <div className="mb-2 flex justify-between">
           <p className="text-sm align-middle">{brand}</p>
@@ -77,7 +77,7 @@ const ProductCard: React.FC<IProductCard> = ({
         </div>
         <div>
           <p className="text-xs text-gray-400">Process</p>
-          <p className="text-sm mb-2 truncate">{process}</p>
+          <p className="text-sm mb-2">{process}</p>
         </div>
         <div>
           <p className="text-xs text-gray-400">Variety</p>

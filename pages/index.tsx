@@ -64,7 +64,7 @@ export function Collection() {
     }
     return (
       <div className="flex grow">
-        <div className="grid grid-cols-4 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-y-3 place-items-center pt-4 basis-full content-start">
+        <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-y-3 place-items-center pt-4 basis-full content-start">
           {skeletonCards.map((_card: ISkeletonProductCard, index: number) => {
             // eslint-disable-next-line react/jsx-key
             return <SkeletonProductCard key={index} />;
@@ -77,7 +77,7 @@ export function Collection() {
   return (
     <>
       <div className="flex grow">
-        <div className="grid grid-cols-4 xs:grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-y-3 place-items-center pt-4 basis-full content-start">
+        <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 gap-y-3 place-items-center pt-4 basis-full content-start">
           {data.flat(1).map((product: any) => {
             return <ProductCard key={product.id} {...product} />;
           })}

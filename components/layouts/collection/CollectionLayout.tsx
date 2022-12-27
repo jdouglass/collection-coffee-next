@@ -25,7 +25,7 @@ const CollectionLayout: React.FC<ICollectionLayout> = ({ children }: any) => {
           <Transition.Root show={mobileFiltersOpen} as={Fragment}>
             <Dialog
               as="div"
-              className="relative z-40 lg:hidden"
+              className="relative z-40 xl:hidden"
               onClose={setMobileFiltersOpen}
             >
               <Transition.Child
@@ -72,13 +72,13 @@ const CollectionLayout: React.FC<ICollectionLayout> = ({ children }: any) => {
             </Dialog>
           </Transition.Root>
 
-          <main className="mx-auto max-w-[1700px] px-4 bg-white">
+          <main className="mx-auto px-4 bg-white">
             <div className="sticky top-0 z-40 bg-white">
               <div className="flex items-center pl-4">
                 <SortSelect />
                 <button
                   type="button"
-                  className="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 lg:hidden"
+                  className="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 xl:hidden"
                   onClick={() => setMobileFiltersOpen(true)}
                 >
                   <FunnelIcon className="h-5 w-5" aria-hidden="true" />
@@ -87,12 +87,14 @@ const CollectionLayout: React.FC<ICollectionLayout> = ({ children }: any) => {
             </div>
 
             <section aria-labelledby="products-heading">
-              <div className="grid grid-cols-1 lg:grid-cols-5">
-                <div className="col-span-1">
-                  <FilterBar />
-                </div>
-                <div className="col-span-4">
-                  <div>{children}</div>
+              <div className="flex float-left w-72">
+                <FilterBar />
+              </div>
+              <div className="flex justify-center">
+                <div className="max-w-[1920px] grid xs:grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 3xl:grid-cols-8">
+                  <div className="xs:col-span-1 sm:col-span-3 md:col-span-4 lg:col-span-5 xl:col-span-6 2xl:col-span-7 3xl:col-span-8">
+                    <div>{children}</div>
+                  </div>
                 </div>
               </div>
             </section>

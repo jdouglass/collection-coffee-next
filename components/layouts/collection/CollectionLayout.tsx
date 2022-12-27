@@ -73,8 +73,8 @@ const CollectionLayout: React.FC<ICollectionLayout> = ({ children }: any) => {
           </Transition.Root>
 
           <main className="mx-auto px-4 bg-white">
-            <div className="sticky top-0 z-40 bg-white">
-              <div className="flex items-center pl-4">
+            <div className="sticky top-20 z-40 bg-white">
+              <div className="flex items-center pl-4 h-10">
                 <SortSelect />
                 <button
                   type="button"
@@ -87,9 +87,7 @@ const CollectionLayout: React.FC<ICollectionLayout> = ({ children }: any) => {
             </div>
 
             <section aria-labelledby="products-heading">
-              <div className="flex float-left w-72">
-                <FilterBar />
-              </div>
+              <FilterBar />
               <div className="flex justify-center">
                 <div className="max-w-[1920px] grid xs:grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 3xl:grid-cols-8">
                   <div className="xs:col-span-1 sm:col-span-3 md:col-span-4 lg:col-span-5 xl:col-span-6 2xl:col-span-7 3xl:col-span-8">

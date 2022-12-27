@@ -46,7 +46,7 @@ const FilterBar: React.FC<IFilterBar> = () => {
   }, []);
 
   return (
-    <section className="h-[calc(100vh-36px)] sticky bg-white overflow-auto top-9 w-full hidden xl:block">
+    <section className="h-[calc(100vh-120px)] float-left w-72 sticky top-[120px] bg-white overflow-auto hidden xl:block">
       {isLoading ? (
         <p>Loading filters...</p>
       ) : (

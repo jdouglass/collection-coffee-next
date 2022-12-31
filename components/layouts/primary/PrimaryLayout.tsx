@@ -7,7 +7,9 @@ const PrimaryLayout: React.FC<IPrimaryLayout> = ({ children }: any) => {
   return (
     <>
       <Head>
-        <title>Collection Coffee</title>
+        <title>
+          Collection Coffee - Canadian Third Wave Coffee Bean Aggregator
+        </title>
       </Head>
       <Header />
       <div className="flex flex-col">

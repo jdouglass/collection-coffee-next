@@ -15,7 +15,9 @@ const CollectionLayout: React.FC<ICollectionLayout> = ({ children }: any) => {
   return (
     <>
       <Head>
-        <title>Collection Coffee</title>
+        <title>
+          {"Collection Coffee - Canada's Third Wave Coffee Bean Aggregator"}
+        </title>
       </Head>
       <Header />
 

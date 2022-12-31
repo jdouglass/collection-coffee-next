@@ -1,6 +1,6 @@
 import { Disclosure } from '@headlessui/react';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ChevronDownIcon from '../../../../public/icons/chevron-down.svg';
 
 export interface IFilterDisclosure {
@@ -14,12 +14,12 @@ const FilterDisclosure: React.FC<IFilterDisclosure> = ({
 }) => {
   const router = useRouter();
   const { pathname, query } = router;
-  const initialVendorParams = Array.isArray(query[section])
+  const initialFilterParams = Array.isArray(query[section])
     ? query[section]
     : query[section]
     ? [query[section]]
     : [];
-  const [selected, setSelected]: any[] = useState(initialVendorParams);
+  const [selected, setSelected]: any[] = useState(initialFilterParams);
   const handleSelectedChange = (e: any) => {
     if (!selected.includes(e.target.value)) {
       setSelected([...selected, e.target.value]);
@@ -38,6 +38,10 @@ const FilterDisclosure: React.FC<IFilterDisclosure> = ({
       });
     }
   };
+
+  useEffect(() => {
+    setSelected([]);
+  }, [router.query]);
 
   return (
     <Disclosure as="div" className="bg-white border-b border-gray-200 py-4">

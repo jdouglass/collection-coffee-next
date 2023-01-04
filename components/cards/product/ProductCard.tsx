@@ -30,7 +30,7 @@ const ProductCard: React.FC<IProductCard> = ({
   vendor,
 }) => {
   return (
-    <div className="max-w-80 h-[490px] bg-white my-3 mx-3">
+    <div className="max-w-80 h-[490px] bg-white m-3">
       <a href={product_url} target="_blank" rel="noopener noreferrer">
         <div className="flex justify-center">
           <Image

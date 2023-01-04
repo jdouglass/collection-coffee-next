@@ -4,10 +4,8 @@ import { ReactElement, useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import useSWRInfinite from 'swr/infinite';
 import ProductCard from '../components/cards/product/ProductCard';
-import SkeletonProductCard, {
-  ISkeletonProductCard,
-} from '../components/cards/skeleton/SkeletonProductCard';
 import CollectionLayout from '../components/layouts/collection/CollectionLayout';
+import LoadingSpinner from '../components/spinner/LoadingSpinner';
 import { IProduct } from '../lib/IProduct';
 
 export interface IProductProps {
@@ -43,35 +41,21 @@ export function Collection() {
     return `/api/products?cursor=${lastId}`;
   };
 
-  const { data, size, setSize, error } = useSWRInfinite<IProduct[]>(
-    getKey,
-    fetcher
-  );
+  const { data, size, setSize, error, isValidating } = useSWRInfinite<
+    IProduct[]
+  >(getKey, fetcher);
 
   useEffect(() => {
     if (!isAtTheEnd && inView) {
       setSize(size + 1);
     }
+    console.log(isAtTheEnd);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView]);
 
   if (error) return <div>Failed to load</div>;
   if (!data) {
-    const limit = 12;
-    const skeletonCards: ISkeletonProductCard[] = [];
-    for (let i = 0; i < limit; i++) {
-      skeletonCards.push(<SkeletonProductCard />);
-    }
-    return (
-      <div className="flex grow">
-        <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 gap-y-3 place-items-center pt-4 basis-full content-start">
-          {skeletonCards.map((_card: ISkeletonProductCard, index: number) => {
-            // eslint-disable-next-line react/jsx-key
-            return <SkeletonProductCard key={index} />;
-          })}
-        </div>
-      </div>
-    );
+    return <LoadingSpinner />;
   }
 
   return (
@@ -83,6 +67,13 @@ export function Collection() {
           })}
         </div>
       </div>
+      {isValidating ? (
+        <div className="flex justify-center pb-10">
+          <LoadingSpinner />
+        </div>
+      ) : (
+        <div className="flex justify-center">End of results</div>
+      )}
       <span className="invisible" ref={ref}>
         Intersection Observer Marker
       </span>

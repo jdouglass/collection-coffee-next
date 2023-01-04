@@ -82,6 +82,8 @@ export default async function fetchProducts(
       products.push(addedProduct);
     }
 
+    await prisma.$disconnect();
+
     return res.status(200).json(products);
   }
 }

@@ -41,7 +41,9 @@ const FilterDisclosure: React.FC<IFilterDisclosure> = ({
 
   useEffect(() => {
     setSelected([]);
-  }, [router.query]);
+    router.replace('/');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Disclosure as="div" className="bg-white border-b border-gray-200 py-4">

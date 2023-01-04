@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import React from 'react';
 import Logo from '../../../public/collection-coffee-logo.svg';
 
 export interface IHeader {}
@@ -10,16 +11,19 @@ const Header: React.FC<IHeader> = () => {
     <nav className="grid grid-cols-3 h-20 border-b sticky top-0 z-50 bg-white mx-4">
       <div className="flex w-72 h-20 shrink-0 items-center justify-center">
         <Link href="/">
-          <Logo
-            className="h-12 hover:cursor-pointer"
-            alt="Collection Coffee logo"
+          <a
             onClick={() => {
-              if (router.pathname === '/') {
+              if (router.asPath === '/') {
                 router.replace('/');
                 window.location.reload();
               }
             }}
-          />
+          >
+            <Logo
+              className="h-12 hover:cursor-pointer"
+              alt="Collection Coffee logo"
+            />
+          </a>
         </Link>
       </div>
       <div className="flex w-full items-center justify-center">
@@ -27,7 +31,7 @@ const Header: React.FC<IHeader> = () => {
           <button
             className="px-5"
             onClick={() => {
-              if (router.pathname === '/') {
+              if (router.asPath === '/') {
                 router.replace('/');
                 window.location.reload();
               }

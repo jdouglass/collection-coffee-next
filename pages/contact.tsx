@@ -1,6 +1,8 @@
 import emailjs from '@emailjs/browser';
+import * as dotenv from 'dotenv';
 import { FormEvent, ReactElement, useRef } from 'react';
 import PrimaryLayout from '../components/layouts/primary/PrimaryLayout';
+dotenv.config;
 
 export function Contact() {
   const form = useRef<HTMLFormElement>(null);

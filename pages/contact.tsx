@@ -1,31 +1,24 @@
 import emailjs from '@emailjs/browser';
-import * as dotenv from 'dotenv';
 import { FormEvent, ReactElement, useRef } from 'react';
 import PrimaryLayout from '../components/layouts/primary/PrimaryLayout';
 
-dotenv.config;
-
 export function Contact() {
   const form = useRef<HTMLFormElement>(null);
+  const serviceID = process.env.SERVICE_ID as string;
+  const templateID = process.env.TEMPLATE_ID as string;
+  const publicKey = process.env.PUBLIC_KEY as string;
 
   const sendEmail = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    emailjs
-      .sendForm(
-        process.env.SERVICE_ID as string,
-        process.env.TEMPLATE_ID as string,
-        form.current!,
-        process.env.PUBLIC_KEY as string
-      )
-      .then(
-        (result) => {
-          console.log(result.text);
-        },
-        (error) => {
-          console.log(error.text);
-        }
-      );
+    emailjs.sendForm(serviceID, templateID, form.current!, publicKey).then(
+      (result) => {
+        console.log(result.text);
+      },
+      (error) => {
+        console.log(error.text);
+      }
+    );
   };
 
   return (

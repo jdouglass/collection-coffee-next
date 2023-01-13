@@ -76,7 +76,7 @@ const CollectionLayout: React.FC<ICollectionLayout> = ({ children }: any) => {
 
           <main className="mx-auto px-4 bg-white">
             <div className="sticky top-20 z-10 bg-white">
-              <div className="flex items-center pl-4 h-10 border-b">
+              <div className="flex items-center pl-4 h-10 border-b border-gray-100">
                 <SortSelect />
                 <button
                   type="button"

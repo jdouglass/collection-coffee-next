@@ -25,16 +25,16 @@ const Header: React.FC<IHeader> = () => {
             >
               <span className="sr-only">Collection Coffee</span>
               <Logo
-                className="h-12 hover:cursor-pointer"
+                className="h-12 hover:cursor-pointer fill-gray-900"
                 alt="Collection Coffee logo"
               />
             </a>
           </Link>
         </div>
-        <div className="hidden lg:flex w-full items-center justify-center">
+        <div className="hidden lg:flex w-full items-center justify-center font-medium text-gray-900 space-x-20">
           <Link href="/">
             <button
-              className="px-5"
+              className="hover:text-gray-500"
               onClick={() => {
                 if (router.asPath === '/') {
                   router.replace('/');
@@ -46,10 +46,10 @@ const Header: React.FC<IHeader> = () => {
             </button>
           </Link>
           <Link href="/about">
-            <button className="px-5">About</button>
+            <button className="hover:text-gray-500">About</button>
           </Link>
           <Link href="/contact">
-            <button className="px-5">Contact</button>
+            <button className="hover:text-gray-500">Contact</button>
           </Link>
         </div>
         <div className="-my-2 -mr-2 inline-flex items-center justify-end w-full col-span-2 lg:col-span-1 lg:hidden">

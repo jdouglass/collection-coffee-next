@@ -53,6 +53,10 @@ export function Collection() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView]);
 
+  useEffect(() => {
+    setIsAtTheEnd(false);
+  }, [router]);
+
   if (error) return <div>Failed to load</div>;
   if (!data) {
     return <LoadingSpinner />;

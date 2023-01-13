@@ -27,7 +27,7 @@ const CollectionLayout: React.FC<ICollectionLayout> = ({ children }: any) => {
           <Transition.Root show={mobileFiltersOpen} as={Fragment}>
             <Dialog
               as="div"
-              className="relative z-40 xl:hidden"
+              className="relative z-20 xl:hidden"
               onClose={setMobileFiltersOpen}
             >
               <Transition.Child
@@ -42,7 +42,7 @@ const CollectionLayout: React.FC<ICollectionLayout> = ({ children }: any) => {
                 <div className="fixed inset-0 bg-black bg-opacity-25" />
               </Transition.Child>
 
-              <div className="fixed inset-0 z-40 flex">
+              <div className="fixed inset-0 flex">
                 <Transition.Child
                   as={Fragment}
                   enter="transition ease-in-out duration-300 transform"
@@ -75,8 +75,8 @@ const CollectionLayout: React.FC<ICollectionLayout> = ({ children }: any) => {
           </Transition.Root>
 
           <main className="mx-auto px-4 bg-white">
-            <div className="sticky top-20 z-40 bg-white">
-              <div className="flex items-center pl-4 h-10">
+            <div className="sticky top-20 z-10 bg-white">
+              <div className="flex items-center pl-4 h-10 border-b">
                 <SortSelect />
                 <button
                   type="button"

@@ -20,7 +20,7 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   return getLayout(
     <>
       <Head>
-        <link rel="Shortcut icon" href="/favicon.ico" />
+        <link rel="Shortcut icon" href="/favicon.svg" />
       </Head>
       {/* Global Site Tag (gtag.js) - Google Analytics */}
       <Script

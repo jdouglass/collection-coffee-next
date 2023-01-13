@@ -1,5 +1,6 @@
 import { NextPage } from 'next';
 import type { AppProps, NextWebVitalsMetric } from 'next/app';
+import Head from 'next/head';
 import Script from 'next/script';
 import { ReactElement, ReactNode } from 'react';
 import '../pages/globals.css';
@@ -18,6 +19,9 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
 
   return getLayout(
     <>
+      <Head>
+        <link rel="Shortcut icon" href="/favicon.ico" />
+      </Head>
       {/* Global Site Tag (gtag.js) - Google Analytics */}
       <Script
         strategy="afterInteractive"

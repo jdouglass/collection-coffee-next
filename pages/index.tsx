@@ -49,7 +49,6 @@ export function Collection() {
     if (!isAtTheEnd && inView) {
       setSize(size + 1);
     }
-    console.log(isAtTheEnd);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inView]);
 

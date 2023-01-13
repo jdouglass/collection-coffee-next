@@ -8,10 +8,6 @@ import XMarkIcon from '../../../public/icons/x-mark.svg';
 
 export interface IHeader {}
 
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ');
-}
-
 const Header: React.FC<IHeader> = () => {
   const router = useRouter();
   return (

@@ -34,7 +34,7 @@ const Header: React.FC<IHeader> = () => {
         <div className="hidden lg:flex w-full items-center justify-center font-medium text-gray-900 space-x-20">
           <Link href="/">
             <button
-              className="hover:text-gray-500"
+              className="hover:text-indigo-500"
               onClick={() => {
                 if (router.asPath === '/') {
                   router.replace('/');
@@ -46,10 +46,10 @@ const Header: React.FC<IHeader> = () => {
             </button>
           </Link>
           <Link href="/about">
-            <button className="hover:text-gray-500">About</button>
+            <button className="hover:text-indigo-500">About</button>
           </Link>
           <Link href="/contact">
-            <button className="hover:text-gray-500">Contact</button>
+            <button className="hover:text-indigo-500">Contact</button>
           </Link>
         </div>
         <div className="-my-2 -mr-2 inline-flex items-center justify-end w-full col-span-2 lg:col-span-1 lg:hidden">

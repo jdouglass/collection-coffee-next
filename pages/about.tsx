@@ -3,12 +3,12 @@ import PrimaryLayout from '../components/layouts/primary/PrimaryLayout';
 
 export function About() {
   return (
-    <section className="bg-white dark:bg-gray-900">
+    <section className="bg-white">
       <div className="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
-        <h2 className="mb-14 text-4xl tracking-tight font-bold text-center text-gray-900 dark:text-white">
+        <h2 className="mb-14 text-4xl tracking-tight font-bold text-center text-gray-900">
           Welcome to Collection Coffee!
         </h2>
-        <p className="mb-8 lg:mb-16 text-gray-600 dark:text-gray-400">
+        <p className="mb-8 lg:mb-16 text-gray-600">
           We are a Canadian-based company that is dedicated to helping coffee
           lovers discover the latest and greatest beans on the market. Our
           platform aggregates data from a wide range of third wave coffee

@@ -30,7 +30,7 @@ const ProductCard: React.FC<IProductCard> = ({
   vendor,
 }) => {
   return (
-    <div className="max-w-80 h-[490px] bg-white m-2 hover:bg-gray-50 p-2 rounded-xl">
+    <div className="max-w-80 xs:max-w-xs h-[500px] bg-white m-2 p-2 rounded-xl group">
       <a href={product_url} target="_blank" rel="noopener noreferrer">
         <div className="flex justify-center">
           <Image
@@ -50,7 +50,7 @@ const ProductCard: React.FC<IProductCard> = ({
           />
         </div>
       </a>
-      <div className="mx-2 my-2">
+      <div className="m-2 w-11/12">
         <p className="mb-1 text-xs text-gray-400">Sold by {vendor}</p>
         <div className="mb-2 flex justify-between">
           <p className="text-sm align-middle">{brand}</p>
@@ -66,22 +66,22 @@ const ProductCard: React.FC<IProductCard> = ({
         </div>
         <div>
           <a href={product_url} target="_blank" rel="noopener noreferrer">
-            <p className="text-md mb-2 leading-5 font-semibold hover:cursor-pointer">
+            <p className="title-text text-md mb-2 leading-5 font-semibold hover:cursor-pointer group-hover:text-indigo-600">
               {title}
             </p>
           </a>
         </div>
         <div>
           <p className="text-xs text-gray-400">Country</p>
-          <p className="text-sm mb-2">{country}</p>
+          <p className="text-sm mb-2 line-clamp-1">{country}</p>
         </div>
         <div>
           <p className="text-xs text-gray-400">Process</p>
-          <p className="text-sm mb-2">{process}</p>
+          <p className="text-sm mb-2 line-clamp-2">{process}</p>
         </div>
         <div>
           <p className="text-xs text-gray-400">Variety</p>
-          <p className="text-sm mb-2">
+          <p className="text-sm mb-2 line-clamp-2">
             {variety ? variety.join(', ') : 'Unknown'}
           </p>
         </div>

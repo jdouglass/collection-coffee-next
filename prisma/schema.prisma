@@ -16,7 +16,7 @@ model products {
   title            String   @db.VarChar(100)
   price            Decimal  @db.Decimal(6, 2)
   weight           Int      @db.Integer
-  process          String   @db.VarChar(50)
+  process          String   @db.Text
   process_category String   @db.VarChar(20)
   variety          String[] @db.Text
   country          String   @db.VarChar(56)

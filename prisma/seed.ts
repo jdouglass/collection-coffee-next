@@ -7,7 +7,7 @@ async function main() {
   await prisma.products.deleteMany({});
 
   const totalProducts = 50;
-  const processList = ['Washed', 'Natural', 'Honey', 'Experimental'];
+  const processList = ['Washed', 'Natural', 'Honey', faker.random.words()];
   const continentList = [
     'Asia',
     'Europe',

@@ -23,14 +23,6 @@ const nextConfig = {
     TEMPLATE_ID: process.env.TEMPLATE_ID,
     PUBLIC_KEY: process.env.PUBLIC_KEY,
   },
-  async rewrites() {
-    return [
-      {
-        source: '/sitemap.xml',
-        destination: '/api/sitemap',
-      },
-    ];
-  },
 };
 
 module.exports = nextConfig;

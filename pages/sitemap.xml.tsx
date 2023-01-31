@@ -1,37 +1,21 @@
-import { globby } from 'globby';
 import { NextApiResponse } from 'next';
 
-async function generateSiteMap() {
-  const pages = await globby([
-    'pages/*.ts*',
-    'data/**/*.mdx',
-    '!data/*.mdx',
-    '!pages/_*.ts*',
-    '!pages/api',
-    '!pages/404.ts*',
-  ]);
-  console.log(pages);
-
+function generateSiteMap() {
   return `<?xml version="1.0" encoding="UTF-8"?>
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-     ${pages
-       .map((page) => {
-         const path = page
-           .replace('pages', '')
-           .replace('data', '')
-           .replace('.tsx', '')
-           .replace('.mdx', '');
-         const route = path === '/index' ? '' : path;
-
-         return `
-          <url>
-              <loc>${`https://collection.coffee${route}`}</loc>
-          </url>
-        `;
-       })
-       .join('')}
-   </urlset>
- `;
+      <url>
+        <loc>https://collection.coffee</loc>
+      </url>
+      <url>
+        <loc>https://collection.coffee/about</loc>
+      </url>
+      <url>
+        <loc>https://collection.coffee/contact</loc>
+      </url>
+      <url>
+        <loc>https://collection.coffee/sitemap.xml</loc>
+      </url>
+   </urlset>`;
 }
 
 function SiteMap() {
@@ -39,7 +23,7 @@ function SiteMap() {
 }
 
 export async function getServerSideProps({ res }: { res: NextApiResponse }) {
-  const sitemap = await generateSiteMap();
+  const sitemap = generateSiteMap();
 
   res.setHeader('Content-Type', 'text/xml');
   res.write(sitemap);

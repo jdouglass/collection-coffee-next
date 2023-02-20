@@ -1,52 +1,29 @@
+'use client';
+
 import { Popover, Transition } from '@headlessui/react';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React, { Fragment } from 'react';
 import Logo from '../../../public/collection-coffee-logo.svg';
-import Bars3Icon from '../../../public/icons/bars3.svg';
-import XMarkIcon from '../../../public/icons/x-mark.svg';
 
 export interface IHeader {}
 
 const Header: React.FC<IHeader> = () => {
-  const router = useRouter();
   return (
-    <Popover className="sticky top-0 bg-white z-20">
-      <nav className="grid grid-cols-3 h-20 border-b bg-white mx-4">
+    <Popover className="sticky top-0 z-20 border-b backdrop-blur-lg shadow-sm">
+      <nav className="grid grid-cols-3 h-20 mx-5 max-w-screen-2xl xl:mx-auto">
         <div className="flex h-20 items-center justify-start pl-2">
           <Link href="/">
-            <a
-              onClick={() => {
-                if (router.asPath === '/') {
-                  router.replace('/');
-                  window.location.reload();
-                }
-              }}
-            >
-              <span className="sr-only">Collection Coffee</span>
-              <Logo
-                className="h-12 hover:cursor-pointer fill-gray-900"
-                alt="Collection Coffee logo"
-              />
-            </a>
+            <span className="sr-only">Collection Coffee</span>
+            <Logo
+              className="h-12 hover:cursor-pointer fill-gray-900"
+              alt="Collection Coffee logo"
+            />
           </Link>
         </div>
         <div className="hidden lg:flex w-full items-center justify-center font-medium text-gray-900 space-x-20">
-          <Link href="/">
-            <button
-              className="hover:text-indigo-500"
-              onClick={() => {
-                if (router.asPath === '/') {
-                  router.replace('/');
-                  window.location.reload();
-                }
-              }}
-            >
-              Collection
-            </button>
-          </Link>
-          <Link href="/about">
-            <button className="hover:text-indigo-500">About</button>
+          <Link href="/collection">
+            <button className="hover:text-indigo-500">Collection</button>
           </Link>
           <Link href="/contact">
             <button className="hover:text-indigo-500">Contact</button>
@@ -91,24 +68,9 @@ const Header: React.FC<IHeader> = () => {
               <div className="mt-6">
                 <nav className="grid gap-y-8">
                   <button className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50">
-                    <Link href="/">
-                      <span
-                        className="ml-3 text-base font-medium text-gray-900 w-full h-full"
-                        onClick={() => {
-                          if (router.asPath === '/') {
-                            router.replace('/');
-                            window.location.reload();
-                          }
-                        }}
-                      >
-                        Collection
-                      </span>
-                    </Link>
-                  </button>
-                  <button className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50">
-                    <Link href="/about">
+                    <Link href="/collection">
                       <span className="ml-3 text-base font-medium text-gray-900 w-full h-full">
-                        About
+                        Collection
                       </span>
                     </Link>
                   </button>

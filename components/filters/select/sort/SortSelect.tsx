@@ -1,10 +1,12 @@
-import { useRouter } from 'next/router';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 export interface ISortSelect {}
 
 const SortSelect: React.FC<ISortSelect> = () => {
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams.toString());
   const router = useRouter();
-  const { pathname, query } = router;
+  const pathname = usePathname();
   const sortOptions = [
     { value: 'newest', label: 'Newest to Oldest' },
     { value: 'oldest', label: 'Oldest to Newest' },
@@ -13,17 +15,16 @@ const SortSelect: React.FC<ISortSelect> = () => {
   ];
 
   const handleSort = (e: any) => {
-    router.push({
-      pathname,
-      query: { ...query, sort: e.currentTarget.value },
-    });
+    params.delete('sort');
+    params.append('sort', e.currentTarget.value);
+    router.push(`${pathname}?${params.toString()}`);
   };
 
   return (
-    <div className="flex items-center">
-      <p className="text-sm font-semibold text-gray-800">Sort:</p>
+    <div className="flex items-center mt-3">
+      <p className="text-sm font-semibold text-gray-800 pr-2">Sort</p>
       <select
-        defaultValue={query.sort}
+        value={params.get('sort') ? (params.get('sort') as string) : ''}
         onChange={(e) => handleSort(e)}
         className="w-full text-gray-800 hover:text-gray-900 appearance-none text-sm font-semibold border-none hover:cursor-pointer focus:outline-none focus:ring-0"
       >

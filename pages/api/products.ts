@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { IProduct } from '../../lib/IProduct';
 const prisma = new PrismaClient();
 
-export default async function fetchProducts(
+export default async function getProducts(
   req: NextApiRequest,
   res: NextApiResponse<IProduct[]>
 ) {

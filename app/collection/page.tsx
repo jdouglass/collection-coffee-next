@@ -1,12 +1,13 @@
+'use client';
+
 import axios from 'axios';
-import { useRouter } from 'next/router';
-import { ReactElement, useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import useSWRInfinite from 'swr/infinite';
-import ProductCard from '../components/cards/product/ProductCard';
-import CollectionLayout from '../components/layouts/collection/CollectionLayout';
-import LoadingSpinner from '../components/spinner/LoadingSpinner';
-import { IProduct } from '../lib/IProduct';
+import ProductCard from '../../components/cards/product/ProductCard';
+import LoadingSpinner from '../../components/spinner/LoadingSpinner';
+import { IProduct } from '../../lib/IProduct';
 
 export interface IProductProps {
   products: IProduct[];
@@ -15,6 +16,7 @@ export interface IProductProps {
 export function Collection() {
   const [isAtTheEnd, setIsAtTheEnd] = useState<boolean>(false);
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { ref, inView } = useInView();
   const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
@@ -29,14 +31,14 @@ export function Collection() {
 
     // first page, we don't have `previousPageData`
     if (pageIndex === 0) {
-      return `/api/products${router.asPath}`;
+      return `/api/products?${searchParams.toString()}`;
     } else {
       lastId = previousPageData[previousPageData.length - 1].id;
     }
 
     // add the cursor to the API endpoint
-    if (router.asPath !== '/') {
-      return `/api/products${router.asPath}&cursor=${lastId}`;
+    if (searchParams.values()) {
+      return `/api/products?${searchParams.toString()}&cursor=${lastId}`;
     }
     return `/api/products?cursor=${lastId}`;
   };
@@ -56,15 +58,21 @@ export function Collection() {
     setIsAtTheEnd(false);
   }, [router]);
 
-  if (error) return <div>Failed to load</div>;
+  if (error) return <div className="flex justify-center">Failed to load</div>;
   if (!data) {
-    return <LoadingSpinner />;
+    return (
+      <div className="flex justify-center">
+        <div className="mt-20 mx-auto">
+          <LoadingSpinner />
+        </div>
+      </div>
+    );
   }
 
   return (
     <>
-      <div className="flex grow">
-        <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 gap-y-3 place-items-center pt-4 basis-full content-start">
+      <div className="flex">
+        <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-3 place-items-center pt-4 basis-full content-start">
           {data.flat(1).map((product: any) => {
             return <ProductCard key={product.id} {...product} />;
           })}
@@ -82,18 +90,6 @@ export function Collection() {
       </span>
     </>
   );
-}
-
-Collection.getLayout = function getLayout(page: ReactElement) {
-  return <CollectionLayout>{page}</CollectionLayout>;
-};
-
-export async function getServerSideProps(context: any) {
-  return {
-    props: {
-      query: context.query,
-    },
-  };
 }
 
 export default Collection;

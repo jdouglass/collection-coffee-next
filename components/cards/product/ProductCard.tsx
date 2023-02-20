@@ -30,7 +30,7 @@ const ProductCard: React.FC<IProductCard> = ({
   vendor,
 }) => {
   return (
-    <div className="max-w-80 xs:max-w-xs h-[500px] bg-white m-2 p-2 rounded-xl group">
+    <div className="max-w-80 xs:max-w-xs max-h-[500px] bg-white m-2 p-2 rounded-xl group shadow-md">
       <a href={product_url} target="_blank" rel="noopener noreferrer">
         <div className="flex justify-center">
           <Image
@@ -40,7 +40,7 @@ const ProductCard: React.FC<IProductCard> = ({
               vendor === 'Pallet Coffee Roasters'
                 ? 'object-contain'
                 : 'object-cover'
-            } hover:cursor-pointer rounded-lg`}
+            } hover:cursor-pointer rounded-md`}
             src={image_url}
             alt={`${brand} ${title} coffee beans`}
             height={260}

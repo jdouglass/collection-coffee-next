@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    appDir: true,
+  },
   images: {
     domains: [
       'collection-coffee-product-images-dev.s3.ca-central-1.amazonaws.com',
@@ -22,6 +25,8 @@ const nextConfig = {
     SERVICE_ID: process.env.SERVICE_ID,
     TEMPLATE_ID: process.env.TEMPLATE_ID,
     PUBLIC_KEY: process.env.PUBLIC_KEY,
+    API_BASE_URL: process.env.API_BASE_URL,
+    BASE_URL: process.env.BASE_URL,
   },
   async headers() {
     return [

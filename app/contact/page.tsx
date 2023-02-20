@@ -1,6 +1,7 @@
+'use client';
+
 import emailjs from '@emailjs/browser';
-import { FormEvent, ReactElement, useRef } from 'react';
-import PrimaryLayout from '../components/layouts/primary/PrimaryLayout';
+import { FormEvent, useRef } from 'react';
 
 export function Contact() {
   const form = useRef<HTMLFormElement>(null);
@@ -99,9 +100,5 @@ export function Contact() {
     </section>
   );
 }
-
-Contact.getLayout = function getLayout(page: ReactElement) {
-  return <PrimaryLayout>{page}</PrimaryLayout>;
-};
 
 export default Contact;

@@ -13,7 +13,7 @@ export interface IProductProps {
   products: IProduct[];
 }
 
-export function Collection() {
+export default function Page() {
   const [isAtTheEnd, setIsAtTheEnd] = useState<boolean>(false);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -91,5 +91,3 @@ export function Collection() {
     </>
   );
 }
-
-export default Collection;

@@ -3,7 +3,7 @@
 import emailjs from '@emailjs/browser';
 import { FormEvent, useRef } from 'react';
 
-export function Contact() {
+export default function Page() {
   const form = useRef<HTMLFormElement>(null);
   const serviceID = process.env.SERVICE_ID as string;
   const templateID = process.env.TEMPLATE_ID as string;
@@ -100,5 +100,3 @@ export function Contact() {
     </section>
   );
 }
-
-export default Contact;

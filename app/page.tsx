@@ -7,7 +7,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import LandingStats from '../components/stats/LandingStats';
 
-export default async function Home() {
+export default async function Page() {
   const features = [
     {
       name: 'Updated hourly.',

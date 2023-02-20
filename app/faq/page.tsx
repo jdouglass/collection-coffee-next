@@ -1,5 +1,3 @@
-export function Faq() {
+export default function Page() {
   return <div>faq</div>;
 }
-
-export default Faq;

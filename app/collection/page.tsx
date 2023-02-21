@@ -59,10 +59,19 @@ export default function Page() {
     setIsAtTheEnd(false);
   }, [router]);
 
-  if (error)
+  if (error) {
     return (
       <div className="flex justify-center pt-20">Failed to load products</div>
     );
+  }
+
+  if (!data) {
+    return (
+      <div className="flex justify-center pb-10">
+        <LoadingSpinner />
+      </div>
+    );
+  }
 
   return (
     <>
@@ -80,13 +89,12 @@ export default function Page() {
           </div>
         )}
       </div>
-      {data && inView && !isAtTheEnd && (
-        <div className="flex justify-center">
+      {isValidating ? (
+        <div className="flex justify-center pb-10">
           <LoadingSpinner />
         </div>
-      )}
-      {isAtTheEnd && (
-        <div className="flex justify-center pt-5">End of results</div>
+      ) : (
+        <div className="flex justify-center my-10">End of results</div>
       )}
       <span className="invisible" ref={ref}>
         Intersection Observer Marker

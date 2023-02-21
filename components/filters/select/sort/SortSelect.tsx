@@ -21,7 +21,7 @@ const SortSelect: React.FC<ISortSelect> = () => {
   };
 
   return (
-    <div className="flex items-center mt-3">
+    <div className="flex items-center">
       <p className="text-sm font-semibold text-gray-800 pr-2">Sort</p>
       <select
         value={params.get('sort') ? (params.get('sort') as string) : ''}

@@ -7,16 +7,18 @@ export interface IFilterBar {}
 
 const FilterBar: React.FC<IFilterBar> = () => {
   return (
-    <section className="h-[calc(100vh-80px)] float-left w-72 sticky bg-white overflow-auto hidden xl:block px-4 scrollbar">
+    <section className="h-[calc(100vh-80px)] float-left w-[340px] sticky bg-white overflow-auto hidden xl:block px-4 scrollbar">
       <div className="flex text-xl font-semibold text-gray-800 items-center space-x-1 pt-5">
         <AdjustmentsHorizontalIcon className="h-5 w-5" />
         <h1>Filters</h1>
       </div>
-      <SortSelect />
-      <FilterDisclosure section={FilterCategory.Vendor} />
-      <FilterDisclosure section={FilterCategory.Process} />
-      <FilterDisclosure section={FilterCategory.Country} />
-      <FilterDisclosure section={FilterCategory.Variety} />
+      <div className="mt-3">
+        <SortSelect />
+        <FilterDisclosure section={FilterCategory.Vendor} />
+        <FilterDisclosure section={FilterCategory.Process} />
+        <FilterDisclosure section={FilterCategory.Country} />
+        <FilterDisclosure section={FilterCategory.Variety} />
+      </div>
     </section>
   );
 };

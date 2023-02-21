@@ -1,8 +1,6 @@
 import { IFilterUtility } from './FilterUtility';
 
-const base: IFilterUtility = {
-  numResults: 123,
-};
+const base: IFilterUtility = {};
 
 export const mockFilterUtilityProps = {
   base,

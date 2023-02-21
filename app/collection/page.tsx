@@ -7,6 +7,7 @@ import { useInView } from 'react-intersection-observer';
 import useSWRInfinite from 'swr/infinite';
 import ProductCard from '../../components/cards/product/ProductCard';
 import LoadingSpinner from '../../components/spinner/LoadingSpinner';
+import FilterUtility from '../../components/utility/filter-utility/FilterUtility';
 import { IProduct } from '../../lib/IProduct';
 
 export interface IProductProps {
@@ -58,32 +59,34 @@ export default function Page() {
     setIsAtTheEnd(false);
   }, [router]);
 
-  if (error) return <div className="flex justify-center">Failed to load</div>;
-  if (!data) {
+  if (error)
     return (
-      <div className="flex justify-center">
-        <div className="mt-20 mx-auto">
-          <LoadingSpinner />
-        </div>
-      </div>
+      <div className="flex justify-center pt-20">Failed to load products</div>
     );
-  }
 
   return (
     <>
-      <div className="flex">
-        <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-3 place-items-center pt-4 basis-full content-start">
-          {data.flat(1).map((product: any) => {
-            return <ProductCard key={product.id} {...product} />;
-          })}
-        </div>
+      <div className="mt-3">
+        <FilterUtility />
+        {!data ? (
+          <div className="flex justify-center">
+            <LoadingSpinner />
+          </div>
+        ) : (
+          <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-3 place-items-center basis-full items-start">
+            {data.flat(1).map((product: any) => {
+              return <ProductCard key={product.id} {...product} />;
+            })}
+          </div>
+        )}
       </div>
-      {isValidating ? (
-        <div className="flex justify-center pb-10">
+      {data && inView && !isAtTheEnd && (
+        <div className="flex justify-center">
           <LoadingSpinner />
         </div>
-      ) : (
-        <div className="flex justify-center">End of results</div>
+      )}
+      {isAtTheEnd && (
+        <div className="flex justify-center pt-5">End of results</div>
       )}
       <span className="invisible" ref={ref}>
         Intersection Observer Marker

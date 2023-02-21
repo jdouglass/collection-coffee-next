@@ -1,82 +1,37 @@
-import { useEffect, useState } from 'react';
+'use client';
+
+import { XMarkIcon } from '@heroicons/react/20/solid';
+import { useAtom } from 'jotai';
+import { FilterCategory } from '../../../../lib/enums/filterCategory';
+import { mobileFilters } from '../../../../lib/store';
 import FilterDisclosure from '../../../filters/disclosure/base/FilterDisclosure';
+import SortSelect from '../../../filters/select/sort/SortSelect';
 
 export interface IFilterBarMobile {}
 
 const FilterBarMobile: React.FC<IFilterBarMobile> = () => {
-  const [vendorOptions, setVendorOptions] = useState<any>([]);
-  const [processCategoryOptions, setProcessCategoryOptions] = useState<any>([]);
-  const [countryOptions, setCountryOptions] = useState<any>([]);
-  const [varietyOptions, setVarietyOptions] = useState<any>([]);
-  const [isLoading, setLoading] = useState<any>(false);
-
-  useEffect(() => {
-    setLoading(true);
-    fetch('/api/vendorList')
-      .then((res) => res.json())
-      .then((vendorResponse) => {
-        const vendorList: string[] = vendorResponse.map(
-          (vendorElement: any) => vendorElement.vendor
-        );
-        setVendorOptions(vendorList);
-      });
-
-    fetch('/api/processCategoryList')
-      .then((res) => res.json())
-      .then((processCategoryResponse) => {
-        const processCategoryList: string[] = processCategoryResponse.map(
-          (processCategory: any) => processCategory.process_category
-        );
-        setProcessCategoryOptions(processCategoryList.sort());
-      });
-
-    fetch('/api/countryList')
-      .then((res) => res.json())
-      .then((countryResponse) => {
-        const countryList: string[] = countryResponse.map(
-          (country: any) => country.country
-        );
-        setCountryOptions(countryList.sort());
-      });
-
-    fetch('/api/varietyList')
-      .then((res) => res.json())
-      .then((varietyResponse) => {
-        const varietySet = new Set();
-        varietyResponse.map((varietySubArray: { variety: any[] }) => {
-          varietySubArray.variety.map((varietyElement: any) => {
-            varietySet.add(varietyElement);
-          });
-        });
-        setVarietyOptions(Array.from(varietySet).sort());
-      });
-    setLoading(false);
-  }, []);
-
+  const [, setViewMobileFilters] = useAtom(mobileFilters);
   return (
-    <section className="overflow-auto full">
-      {isLoading ? (
-        <p>Loading filters...</p>
-      ) : (
-        <>
-          <div className="px-4">
-            <FilterDisclosure section="Vendor" options={vendorOptions} />
-          </div>
-          <div className="px-4">
-            <FilterDisclosure
-              section="Process"
-              options={processCategoryOptions}
-            />
-          </div>
-          <div className="px-4">
-            <FilterDisclosure section="Country" options={countryOptions} />
-          </div>
-          <div className="px-4">
-            <FilterDisclosure section="Variety" options={varietyOptions} />
-          </div>
-        </>
-      )}
-    </section>
+    <div className="px-4">
+      <div className="flex items-center justify-between">
+        <h2 className="text-lg font-medium text-gray-900">Filters</h2>
+        <button
+          type="button"
+          className="-mr-2 flex h-10 w-10 items-center justify-center rounded-md bg-white p-2 text-gray-400"
+          onClick={() => setViewMobileFilters(false)}
+        >
+          <span className="sr-only">Close menu</span>
+          <XMarkIcon className="h-6 w-6" aria-hidden="true" />
+        </button>
+      </div>
+      <div className="mt-3">
+        <SortSelect />
+        <FilterDisclosure section={FilterCategory.Vendor} />
+        <FilterDisclosure section={FilterCategory.Process} />
+        <FilterDisclosure section={FilterCategory.Country} />
+        <FilterDisclosure section={FilterCategory.Variety} />
+      </div>
+    </div>
   );
 };
 

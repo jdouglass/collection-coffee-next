@@ -7351,6 +7351,11 @@ jest-worker@^27.4.5:
     merge-stream "^2.0.0"
     supports-color "^8.0.0"
 
+jotai@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/jotai/-/jotai-2.0.2.tgz#52728e91de61742263e40fda79a367ab4649506c"
+  integrity sha512-0yOked08Swa84LUbBjtj7ZLZrE05n3u50rHeZ+bsT86thUjcy0kFgQz9GmEWhYbQDFoT1G8Ww6edSj/MBJHO4A==
+
 js-sha3@0.8.0:
   version "0.8.0"
   resolved "https://registry.yarnpkg.com/js-sha3/-/js-sha3-0.8.0.tgz#b9b7a5da73afad7dedd0f8c463954cbde6818840"

@@ -1,11 +1,25 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import useSWR from 'swr';
 
-export interface ILandingStats {
-  totalProducts: number;
-  totalVendors: number;
-  totalBrands: number;
+export interface ILandingStats {}
+
+async function getCount(type?: string): Promise<number> {
+  const API_BASE_URL = process.env.API_BASE_URL as string;
+  if (type === 'brand' || type === 'vendor') {
+    const res = await fetch(
+      `${API_BASE_URL}/api/landingPageStats?type=${type}`,
+      {
+        cache: 'no-store',
+      }
+    );
+    return res.json();
+  }
+  const res = await fetch(`${API_BASE_URL}/api/landingPageStats`, {
+    cache: 'no-store',
+  });
+  return res.json();
 }
 
 const easeOutQuad = (t: number, b: number, c: number, d: number) => {
@@ -13,15 +27,31 @@ const easeOutQuad = (t: number, b: number, c: number, d: number) => {
   return Math.round(-c * t * (t - 2) + b);
 };
 
-const LandingStats: React.FC<ILandingStats> = ({
-  totalProducts,
-  totalVendors,
-  totalBrands,
-}: {
-  totalProducts: number;
-  totalVendors: number;
-  totalBrands: number;
-}) => {
+const LandingStats: React.FC<ILandingStats> = () => {
+  const totalProductFetcher = () => getCount();
+  const totalVendorFetcher = () => getCount('vendor');
+  const totalBrandFetcher = () => getCount('brand');
+  const totalProductsResponse = useSWR(
+    '/api/landingPageStats',
+    totalProductFetcher
+  );
+  const totalVendorsResponse = useSWR(
+    '/api/landingPageStats?type=vendor',
+    totalVendorFetcher
+  );
+  const totalBrandsResponse = useSWR(
+    '/api/landingPageStats?type=brand',
+    totalBrandFetcher
+  );
+  const totalProducts = !isNaN(Number(totalProductsResponse.data))
+    ? Number(totalProductsResponse.data)
+    : 0;
+  const totalVendors = !isNaN(Number(totalVendorsResponse.data))
+    ? Number(totalVendorsResponse.data)
+    : 0;
+  const totalBrands = !isNaN(Number(totalBrandsResponse.data))
+    ? Number(totalBrandsResponse.data)
+    : 0;
   const start = 0;
   const productDuration = 3000;
   const vendorDuration = 2000;

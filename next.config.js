@@ -27,6 +27,7 @@ const nextConfig = {
     PUBLIC_KEY: process.env.PUBLIC_KEY,
     API_BASE_URL: process.env.API_BASE_URL,
     BASE_URL: process.env.BASE_URL,
+    PROD_BASE_URL: process.env.PROD_BASE_URL,
   },
   async headers() {
     return [

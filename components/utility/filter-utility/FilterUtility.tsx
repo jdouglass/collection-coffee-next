@@ -4,6 +4,7 @@ import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
 import { useAtom } from 'jotai';
 import { useSearchParams } from 'next/navigation';
 import useSWR from 'swr';
+import useScroll from '../../../lib/hooks/useScroll';
 import { mobileFilters } from '../../../lib/store';
 
 export interface IFilterUtility {}
@@ -25,9 +26,15 @@ const FilterUtility: React.FC<IFilterUtility> = () => {
     fetcher
   );
   const [, setViewMobileFilters] = useAtom(mobileFilters);
+  const scrolled = useScroll(50);
 
   return (
-    <section className="grid grid-cols-2 bg-white w-full h-8 items-center">
+    <section
+      className={`grid grid-cols-2 bg-white w-full items-center sticky top-20 py-3 ${
+        scrolled ? 'border-b border-gray-200' : 'bg-white'
+      }
+      `}
+    >
       <span className="flex">
         <p className="flex text-blue-500 pl-4 font-semibold">
           {productCount.data ? productCount.data : 0}

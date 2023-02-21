@@ -10,8 +10,8 @@ export interface IHeader {}
 
 const Header: React.FC<IHeader> = () => {
   return (
-    <Popover className="sticky top-0 z-20 border-b backdrop-blur-lg shadow-sm">
-      <nav className="grid grid-cols-3 h-20 mx-5 max-w-screen-2xl xl:mx-auto">
+    <Popover className="sticky top-0 z-20 border-b backdrop-blur-lg shadow-sm bg-white/50">
+      <nav className="grid grid-cols-3 h-20 mx-5 max-w-screen-3xl xl:mx-auto">
         <div className="flex h-20 items-center justify-start pl-2">
           <Link href="/">
             <span className="sr-only">Collection Coffee</span>
@@ -52,12 +52,13 @@ const Header: React.FC<IHeader> = () => {
           <div className="divide-y-2 divide-gray-50 rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5">
             <div className="px-5 pt-5 pb-6">
               <div className="flex items-center justify-between">
-                <div>
+                <Link href="/">
+                  <span className="sr-only">Collection Coffee</span>
                   <Logo
-                    className="h-12 hover:cursor-pointer"
+                    className="h-12 hover:cursor-pointer fill-gray-900"
                     alt="Collection Coffee logo"
                   />
-                </div>
+                </Link>
                 <div className="-mr-2">
                   <Popover.Button className="inline-flex items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
                     <span className="sr-only">Close menu</span>

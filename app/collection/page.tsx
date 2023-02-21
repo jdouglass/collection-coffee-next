@@ -75,14 +75,14 @@ export default function Page() {
 
   return (
     <>
-      <div className="mt-3">
+      <div>
         <FilterUtility />
         {!data ? (
           <div className="flex justify-center">
             <LoadingSpinner />
           </div>
         ) : (
-          <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-3 place-items-center basis-full items-start">
+          <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-8 place-items-center basis-full items-start">
             {data.flat(1).map((product: any) => {
               return <ProductCard key={product.id} {...product} />;
             })}

@@ -30,7 +30,7 @@ const FilterUtility: React.FC<IFilterUtility> = () => {
     <section className="grid grid-cols-2 bg-white w-full h-8 items-center">
       <span className="flex">
         <p className="flex text-blue-500 pl-4 font-semibold">
-          {productCount.data}
+          {productCount.data ? productCount.data : 0}
         </p>
         <p className="pl-2">products found</p>
       </span>

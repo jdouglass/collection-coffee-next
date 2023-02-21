@@ -7,7 +7,27 @@ import Image from 'next/image';
 import Link from 'next/link';
 import LandingStats from '../components/stats/LandingStats';
 
+async function getCount(type?: string): Promise<number> {
+  const API_BASE_URL = process.env.API_BASE_URL as string;
+  if (type === 'brand' || type === 'vendor') {
+    const res = await fetch(
+      `${API_BASE_URL}/api/landingPageStats?type=${type}`,
+      {
+        cache: 'no-store',
+      }
+    );
+    return res.json();
+  }
+  const res = await fetch(`${API_BASE_URL}/api/landingPageStats`, {
+    cache: 'no-store',
+  });
+  return res.json();
+}
+
 export default async function Page() {
+  const totalProducts = await getCount();
+  const totalVendors = await getCount('vendor');
+  const totalBrands = await getCount('brand');
   const features = [
     {
       name: 'Updated hourly.',
@@ -78,7 +98,11 @@ export default async function Page() {
               </Link>
             </div>
           </div>
-          <LandingStats />
+          <LandingStats
+            totalProducts={totalProducts}
+            totalVendors={totalVendors}
+            totalBrands={totalBrands}
+          />
           <div className="overflow-hidden pt-20">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
               <div className="mx-auto grid max-w-2xl grid-cols-1 gap-y-16 gap-x-8 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">

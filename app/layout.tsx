@@ -1,4 +1,4 @@
-'use client';
+import { AnalyticsWrapper } from '../components/analytics/analytics';
 
 import Header from '../components/navigation/header/Header';
 import './globals.css';
@@ -12,8 +12,8 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Header />
-
         {children}
+        <AnalyticsWrapper />
       </body>
     </html>
   );

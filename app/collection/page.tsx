@@ -67,8 +67,11 @@ export default function Page() {
 
   if (!data) {
     return (
-      <div className="flex justify-center pb-10">
-        <LoadingSpinner />
+      <div>
+        <FilterUtility />
+        <div className="flex justify-center pb-10">
+          <LoadingSpinner />
+        </div>
       </div>
     );
   }
@@ -77,11 +80,7 @@ export default function Page() {
     <>
       <div>
         <FilterUtility />
-        {!data ? (
-          <div className="flex justify-center">
-            <LoadingSpinner />
-          </div>
-        ) : (
+        {data && (
           <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 place-items-center basis-full items-start px-2">
             {data.flat(1).map((product: any) => {
               return <ProductCard key={product.id} {...product} />;
@@ -89,11 +88,12 @@ export default function Page() {
           </div>
         )}
       </div>
-      {isValidating ? (
+      {isValidating && (
         <div className="flex justify-center pb-10">
           <LoadingSpinner />
         </div>
-      ) : (
+      )}
+      {!isValidating && isAtTheEnd && (
         <div className="flex justify-center my-10">End of results</div>
       )}
       <span className="invisible" ref={ref}>

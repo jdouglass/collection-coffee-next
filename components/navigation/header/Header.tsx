@@ -11,7 +11,7 @@ export interface IHeader {}
 const Header: React.FC<IHeader> = () => {
   return (
     <Popover className="sticky top-0 z-20 border-b backdrop-blur-lg shadow-sm bg-white/50">
-      <nav className="grid grid-cols-3 h-20 mx-5 max-w-screen-3xl xl:mx-auto">
+      <nav className="grid grid-cols-3 h-20 mx-5 max-w-screen-2xl xl:mx-auto">
         <div className="flex h-20 items-center justify-start pl-2">
           <Link href="/">
             <span className="sr-only">Collection Coffee</span>

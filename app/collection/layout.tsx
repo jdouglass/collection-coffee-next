@@ -14,7 +14,7 @@ export default function CollectionLayout({
 }) {
   const [viewMobileFilers, setViewMobileFilters] = useAtom(mobileFilters);
   return (
-    <section className="max-w-screen-3xl mx-auto flex">
+    <section className="max-w-screen-2xl mx-auto flex">
       <Transition.Root show={viewMobileFilers} as={Fragment}>
         <Dialog
           as="div"

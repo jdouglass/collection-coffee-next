@@ -1,17 +1,17 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
-import LandingStats, { ILandingStats } from './LandingStats';
-import { mockFilterCategoryProps } from './LandingStats.mocks';
+import NumberCounter, { INumberCounter } from './NumberCounter';
+import { mockFilterCategoryProps } from './NumberCounter.mocks';
 
 export default {
-  title: 'LandingStats',
-  component: LandingStats,
+  title: 'NumberCounter',
+  component: NumberCounter,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {},
-} as ComponentMeta<typeof LandingStats>;
+} as ComponentMeta<typeof NumberCounter>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof LandingStats> = (args) => (
-  <LandingStats {...args} />
+const Template: ComponentStory<typeof NumberCounter> = (args) => (
+  <NumberCounter {...args} />
 );
 
 export const Base = Template.bind({});
@@ -19,4 +19,4 @@ export const Base = Template.bind({});
 
 Base.args = {
   ...mockFilterCategoryProps.base,
-} as ILandingStats;
+} as INumberCounter;

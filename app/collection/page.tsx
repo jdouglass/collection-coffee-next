@@ -32,14 +32,14 @@ export default function Page() {
 
     // first page, we don't have `previousPageData`
     if (pageIndex === 0) {
-      return `/api/products?${searchParams.toString()}`;
+      return `/api/products?${searchParams!.toString()}`;
     } else {
       lastId = previousPageData[previousPageData.length - 1].id;
     }
 
     // add the cursor to the API endpoint
-    if (searchParams.values()) {
-      return `/api/products?${searchParams.toString()}&cursor=${lastId}`;
+    if (searchParams!.values()) {
+      return `/api/products?${searchParams!.toString()}&cursor=${lastId}`;
     }
     return `/api/products?cursor=${lastId}`;
   };
@@ -81,7 +81,7 @@ export default function Page() {
       <div>
         <FilterUtility />
         {data && (
-          <div className="grid xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 place-items-center basis-full items-start px-2">
+          <div className="grid basis-full place-items-center items-start gap-8 px-2 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             {data.flat(1).map((product: any) => {
               return <ProductCard key={product.id} {...product} />;
             })}
@@ -94,7 +94,7 @@ export default function Page() {
         </div>
       )}
       {!isValidating && isAtTheEnd && (
-        <div className="flex justify-center my-10">End of results</div>
+        <div className="my-10 flex justify-center">End of results</div>
       )}
       <span className="invisible" ref={ref}>
         Intersection Observer Marker

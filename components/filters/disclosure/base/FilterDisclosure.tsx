@@ -52,7 +52,7 @@ const FilterDisclosure: React.FC<IFilterDisclosure> = ({ section }) => {
   const router = useRouter();
   const pathname = usePathname() as string;
   const searchParams = useSearchParams();
-  const params = new URLSearchParams(searchParams.toString());
+  const params = new URLSearchParams(searchParams!.toString());
 
   const handleSelectedChange = (e: any) => {
     if (!params.getAll(section).includes(e.target.value)) {
@@ -68,7 +68,7 @@ const FilterDisclosure: React.FC<IFilterDisclosure> = ({ section }) => {
   };
 
   return (
-    <Disclosure as="div" className="bg-white border-b border-gray-200 py-4">
+    <Disclosure as="div" className="border-b border-gray-200 bg-white py-4">
       {({ open }) => (
         <>
           <Disclosure.Button className="flex w-full items-center justify-between bg-white py-2 text-sm text-gray-400 hover:text-gray-500">
@@ -78,7 +78,7 @@ const FilterDisclosure: React.FC<IFilterDisclosure> = ({ section }) => {
                 open
                   ? 'rotate-180 transform duration-300'
                   : 'transform duration-300'
-              } h-5 w-5 text-gray-500 mr-2`}
+              } mr-2 h-5 w-5 text-gray-500`}
             />
           </Disclosure.Button>
           <Disclosure.Panel className="pt-4 pl-3">
@@ -93,13 +93,13 @@ const FilterDisclosure: React.FC<IFilterDisclosure> = ({ section }) => {
                       type="checkbox"
                       value={option}
                       name={option}
-                      className="h-4 w-4 pr-2 border-gray-300 rounded text-indigo-600 hover:cursor-pointer focus:ring-0 focus:ring-offset-0"
+                      className="h-4 w-4 rounded border-gray-300 pr-2 text-indigo-600 hover:cursor-pointer focus:ring-0 focus:ring-offset-0"
                       onChange={(e) => handleSelectedChange(e)}
                       checked={params.getAll(section).includes(option)}
                     />
                     <label
                       htmlFor={option}
-                      className="grow text-sm text-gray-600 px-4 pl-2 items-center hover:cursor-pointer"
+                      className="grow items-center px-4 pl-2 text-sm text-gray-600 hover:cursor-pointer"
                     >
                       {option}
                     </label>

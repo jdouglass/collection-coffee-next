@@ -30,7 +30,8 @@
     "**/*.tsx",
     "lib/gtag.ts",
     "prisma/*.ts",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "C:\\Users\\Johnathon\\code\\collection-coffee-next\\.next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

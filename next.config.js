@@ -7,6 +7,7 @@ const nextConfig = {
     domains: [
       'collection-coffee-product-images-dev.s3.ca-central-1.amazonaws.com',
       'loremflickr.com',
+      'noqmdssymnsayrhbxsye.supabase.co',
     ],
   },
   webpack(config) {

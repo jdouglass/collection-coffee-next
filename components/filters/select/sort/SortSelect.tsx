@@ -4,7 +4,7 @@ export interface ISortSelect {}
 
 const SortSelect: React.FC<ISortSelect> = () => {
   const searchParams = useSearchParams();
-  const params = new URLSearchParams(searchParams.toString());
+  const params = new URLSearchParams(searchParams!.toString());
   const router = useRouter();
   const pathname = usePathname();
   const sortOptions = [
@@ -22,11 +22,11 @@ const SortSelect: React.FC<ISortSelect> = () => {
 
   return (
     <div className="flex items-center">
-      <p className="text-sm font-semibold text-gray-800 pr-2">Sort</p>
+      <p className="pr-2 text-sm font-semibold text-gray-800">Sort</p>
       <select
         value={params.get('sort') ? (params.get('sort') as string) : ''}
         onChange={(e) => handleSort(e)}
-        className="w-full text-gray-800 hover:text-gray-900 appearance-none text-sm font-semibold border-none hover:cursor-pointer focus:outline-none focus:ring-0"
+        className="w-full appearance-none border-none text-sm font-semibold text-gray-800 hover:cursor-pointer hover:text-gray-900 focus:outline-none focus:ring-0"
       >
         {sortOptions.map((sortOption) => {
           return (

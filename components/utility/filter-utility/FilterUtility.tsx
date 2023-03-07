@@ -20,9 +20,9 @@ const getProductCount = async (searchParams: string): Promise<number> => {
 
 const FilterUtility: React.FC<IFilterUtility> = () => {
   const searchParams = useSearchParams();
-  const fetcher = () => getProductCount(searchParams.toString());
+  const fetcher = () => getProductCount(searchParams!.toString());
   const productCount = useSWR(
-    `/api/productResultsCount?${searchParams.toString()}`,
+    `/api/productResultsCount?${searchParams!.toString()}`,
     fetcher
   );
   const [, setViewMobileFilters] = useAtom(mobileFilters);

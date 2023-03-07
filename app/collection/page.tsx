@@ -96,9 +96,11 @@ export default function Page() {
       {!isValidating && isAtTheEnd && (
         <div className="my-10 flex justify-center">End of results</div>
       )}
-      <span className="invisible" ref={ref}>
-        Intersection Observer Marker
-      </span>
+      {!isValidating && (
+        <span className="invisible" ref={ref}>
+          Intersection Observer Marker
+        </span>
+      )}
     </>
   );
 }

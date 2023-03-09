@@ -8,6 +8,7 @@ const nextConfig = {
       'collection-coffee-product-images-dev.s3.ca-central-1.amazonaws.com',
       'loremflickr.com',
       'noqmdssymnsayrhbxsye.supabase.co',
+      'cdn.sanity.io',
     ],
   },
   webpack(config) {
@@ -29,6 +30,9 @@ const nextConfig = {
     API_BASE_URL: process.env.API_BASE_URL,
     BASE_URL: process.env.BASE_URL,
     PROD_BASE_URL: process.env.PROD_BASE_URL,
+    NEXT_PUBLIC_SANITY_PROJECT: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+    NEXT_PUBLIC_SANITY_DATASET: process.env.NEXT_PUBLIC_SANITY_DATASET,
+    NEXT_PUBLIC_SANITY_API_VERSION: process.env.NEXT_PUBLIC_SANITY_DATASET,
   },
   async headers() {
     return [

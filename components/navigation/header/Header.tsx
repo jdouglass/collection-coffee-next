@@ -25,6 +25,9 @@ const Header: React.FC<IHeader> = () => {
           <Link href="/collection">
             <button className="hover:text-indigo-500">Collection</button>
           </Link>
+          <Link href="/resources">
+            <button className="hover:text-indigo-500">Resources</button>
+          </Link>
           <Link href="/contact">
             <button className="hover:text-indigo-500">Contact</button>
           </Link>
@@ -72,6 +75,13 @@ const Header: React.FC<IHeader> = () => {
                     <Link href="/collection">
                       <span className="ml-3 text-base font-medium text-gray-900 w-full h-full">
                         Collection
+                      </span>
+                    </Link>
+                  </button>
+                  <button className="-m-3 flex items-start rounded-lg p-3 hover:bg-gray-50">
+                    <Link href="/resources">
+                      <span className="ml-3 text-base font-medium text-gray-900 w-full h-full">
+                        Resources
                       </span>
                     </Link>
                   </button>

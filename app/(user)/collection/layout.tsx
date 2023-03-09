@@ -3,9 +3,9 @@
 import { Dialog, Transition } from '@headlessui/react';
 import { useAtom } from 'jotai';
 import { Fragment } from 'react';
-import FilterBar from '../../components/utility/filter-bar/FilterBar';
-import FilterBarMobile from '../../components/utility/filter-bar/mobile/FilterBarMobile';
-import { mobileFilters } from '../../lib/store';
+import FilterBar from '../../../components/utility/filter-bar/FilterBar';
+import FilterBarMobile from '../../../components/utility/filter-bar/mobile/FilterBarMobile';
+import { mobileFilters } from '../../../lib/store';
 
 export default function CollectionLayout({
   children,

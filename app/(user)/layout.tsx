@@ -1,7 +1,7 @@
-import { AnalyticsWrapper } from '../components/analytics/analytics';
+import { AnalyticsWrapper } from '../../components/analytics/analytics';
+import Header from '../../components/navigation/header/Header';
 
-import Header from '../components/navigation/header/Header';
-import './globals.css';
+import '../globals.css';
 
 export default function RootLayout({
   children,

@@ -5,10 +5,10 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import useSWRInfinite from 'swr/infinite';
-import ProductCard from '../../components/cards/product/ProductCard';
-import LoadingSpinner from '../../components/spinner/LoadingSpinner';
-import FilterUtility from '../../components/utility/filter-utility/FilterUtility';
-import { IProduct } from '../../lib/IProduct';
+import ProductCard from '../../../components/cards/product/ProductCard';
+import LoadingSpinner from '../../../components/spinner/LoadingSpinner';
+import FilterUtility from '../../../components/utility/filter-utility/FilterUtility';
+import { IProduct } from '../../../lib/IProduct';
 
 export interface IProductProps {
   products: IProduct[];

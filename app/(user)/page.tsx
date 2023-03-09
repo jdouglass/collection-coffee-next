@@ -1,9 +1,9 @@
-import LeftSideGradient from '../components/backgrounds/leftSideGradient/LeftSideGradient';
-import RightSideGradient from '../components/backgrounds/rightSideGradient/RightSideGradient';
-import ExploreTheCollectionButton from '../components/buttons/exploreTheCollection/ExploreTheCollectionButton';
-import LandingFeatures from '../components/featuresSections/landingFeatures/LandingFeatures';
-import Hero from '../components/hero/Hero';
-import LandingStatsContainer from '../components/stats/LandingStatsContainer';
+import LeftSideGradient from '../../components/backgrounds/leftSideGradient/LeftSideGradient';
+import RightSideGradient from '../../components/backgrounds/rightSideGradient/RightSideGradient';
+import ExploreTheCollectionButton from '../../components/buttons/exploreTheCollection/ExploreTheCollectionButton';
+import LandingFeatures from '../../components/featuresSections/landingFeatures/LandingFeatures';
+import Hero from '../../components/hero/Hero';
+import LandingStatsContainer from '../../components/stats/LandingStatsContainer';
 
 async function getCount(type?: string): Promise<number> {
   const API_BASE_URL = process.env.API_BASE_URL as string;

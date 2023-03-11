@@ -17,7 +17,6 @@ export interface IProductProps {
 export default function Page() {
   const [isAtTheEnd, setIsAtTheEnd] = useState<boolean>(false);
   const searchParams = useSearchParams();
-  const fetchAmount = 12;
   const { ref, inView } = useInView();
   const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
@@ -44,8 +43,10 @@ export default function Page() {
     return `/api/products?cursor=${lastId}`;
   };
 
-  const { data, size, setSize, error, isValidating, isLoading, mutate } =
-    useSWRInfinite<IProduct[]>(getKey, fetcher);
+  const { data, size, setSize, error, isLoading } = useSWRInfinite<IProduct[]>(
+    getKey,
+    fetcher
+  );
 
   const isLoadingMore =
     isLoading || (size > 0 && data && typeof data[size - 1] === 'undefined');

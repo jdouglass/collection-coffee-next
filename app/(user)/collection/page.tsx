@@ -1,7 +1,7 @@
 'use client';
 
 import axios from 'axios';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import useSWRInfinite from 'swr/infinite';
@@ -16,7 +16,6 @@ export interface IProductProps {
 
 export default function Page() {
   const [isAtTheEnd, setIsAtTheEnd] = useState<boolean>(false);
-  const router = useRouter();
   const searchParams = useSearchParams();
   const fetchAmount = 12;
   const { ref, inView } = useInView();
@@ -48,14 +47,8 @@ export default function Page() {
   const { data, size, setSize, error, isValidating, isLoading, mutate } =
     useSWRInfinite<IProduct[]>(getKey, fetcher);
 
-  const isRefreshing = isValidating && data && data.length === size;
   const isLoadingMore =
     isLoading || (size > 0 && data && typeof data[size - 1] === 'undefined');
-  const isEmpty = data?.[0]?.length === 0;
-  const isReachingEnd =
-    isEmpty || (data && data[data.length - 1]?.length < fetchAmount);
-
-  console.log(inView, isAtTheEnd);
 
   useEffect(() => {
     if (!isAtTheEnd && inView) {

@@ -18,6 +18,7 @@ export default function Page() {
   const [isAtTheEnd, setIsAtTheEnd] = useState<boolean>(false);
   const router = useRouter();
   const searchParams = useSearchParams();
+  const fetchAmount = 12;
   const { ref, inView } = useInView();
   const fetcher = (url: string) => axios.get(url).then((res) => res.data);
 
@@ -44,9 +45,17 @@ export default function Page() {
     return `/api/products?cursor=${lastId}`;
   };
 
-  const { data, size, setSize, error, isValidating } = useSWRInfinite<
-    IProduct[]
-  >(getKey, fetcher);
+  const { data, size, setSize, error, isValidating, isLoading, mutate } =
+    useSWRInfinite<IProduct[]>(getKey, fetcher);
+
+  const isRefreshing = isValidating && data && data.length === size;
+  const isLoadingMore =
+    isLoading || (size > 0 && data && typeof data[size - 1] === 'undefined');
+  const isEmpty = data?.[0]?.length === 0;
+  const isReachingEnd =
+    isEmpty || (data && data[data.length - 1]?.length < fetchAmount);
+
+  console.log(inView, isAtTheEnd);
 
   useEffect(() => {
     if (!isAtTheEnd && inView) {
@@ -57,7 +66,7 @@ export default function Page() {
 
   useEffect(() => {
     setIsAtTheEnd(false);
-  }, [router]);
+  }, [searchParams]);
 
   if (error) {
     return (
@@ -69,8 +78,10 @@ export default function Page() {
     return (
       <div>
         <FilterUtility />
-        <div className="flex justify-center pb-10">
-          <LoadingSpinner size={8} />
+        <div className="flex justify-center pb-10 mt-7">
+          <div className="w-8 h-8">
+            <LoadingSpinner size={8} />
+          </div>
         </div>
       </div>
     );
@@ -88,19 +99,20 @@ export default function Page() {
           </div>
         )}
       </div>
-      {isValidating && (
+      {isLoadingMore && !isAtTheEnd ? (
         <div className="flex justify-center pb-10 mt-7">
-          <LoadingSpinner size={8} />
+          <div className="w-8 h-8">
+            <LoadingSpinner size={8} />
+          </div>
         </div>
-      )}
-      {!isValidating && isAtTheEnd && (
-        <div className="my-10 flex justify-center">End of results</div>
-      )}
-      {!isValidating && (
+      ) : (
         <span className="invisible" ref={ref}>
           Intersection Observer Marker
         </span>
       )}
+      {isAtTheEnd ? (
+        <div className="my-10 flex justify-center">End of results</div>
+      ) : undefined}
     </>
   );
 }

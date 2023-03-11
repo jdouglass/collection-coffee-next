@@ -10,14 +10,12 @@ async function getCount(type?: string): Promise<number> {
   if (type === 'brand' || type === 'vendor') {
     const res = await fetch(
       `${API_BASE_URL}/api/landingPageStats?type=${type}`,
-      {
-        cache: 'no-store',
-      }
+      { next: { revalidate: 60 } }
     );
     return res.json();
   }
   const res = await fetch(`${API_BASE_URL}/api/landingPageStats`, {
-    cache: 'no-store',
+    next: { revalidate: 60 },
   });
   return res.json();
 }

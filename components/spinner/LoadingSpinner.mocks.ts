@@ -1,7 +1,9 @@
 import { ILoadingSpinner } from './LoadingSpinner';
 
-const base: ILoadingSpinner = {};
+const base: ILoadingSpinner = {
+  size: 8,
+};
 
-export const mockSkeletonProductCardProps = {
+export const mockLoadingSpinner = {
   base,
 };

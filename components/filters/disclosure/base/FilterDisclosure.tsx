@@ -55,6 +55,7 @@ const FilterDisclosure: React.FC<IFilterDisclosure> = ({ section }) => {
   const params = new URLSearchParams(searchParams!.toString());
 
   const handleSelectedChange = (e: any) => {
+    e.preventDefault();
     if (!params.getAll(section).includes(e.target.value)) {
       params.append(section, e.target.value);
     } else {

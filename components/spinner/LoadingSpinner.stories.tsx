@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from '@storybook/react';
 import LoadingSpinner, { ILoadingSpinner } from './LoadingSpinner';
-import { mockSkeletonProductCardProps } from './LoadingSpinner.mocks';
+import { mockLoadingSpinner } from './LoadingSpinner.mocks';
 
 export default {
   title: 'cards/LoadingSpinner',
@@ -18,5 +18,5 @@ export const Base = Template.bind({});
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 
 Base.args = {
-  ...mockSkeletonProductCardProps.base,
+  ...mockLoadingSpinner.base,
 } as ILoadingSpinner;

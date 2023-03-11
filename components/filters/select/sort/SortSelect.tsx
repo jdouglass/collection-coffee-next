@@ -15,6 +15,7 @@ const SortSelect: React.FC<ISortSelect> = () => {
   ];
 
   const handleSort = (e: any) => {
+    e.preventDefault();
     params.delete('sort');
     params.append('sort', e.currentTarget.value);
     router.push(`${pathname}?${params.toString()}`);

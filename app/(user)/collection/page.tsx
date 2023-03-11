@@ -70,7 +70,7 @@ export default function Page() {
       <div>
         <FilterUtility />
         <div className="flex justify-center pb-10">
-          <LoadingSpinner />
+          <LoadingSpinner size={8} />
         </div>
       </div>
     );
@@ -89,8 +89,8 @@ export default function Page() {
         )}
       </div>
       {isValidating && (
-        <div className="flex justify-center pb-10">
-          <LoadingSpinner />
+        <div className="flex justify-center pb-10 mt-7">
+          <LoadingSpinner size={8} />
         </div>
       )}
       {!isValidating && isAtTheEnd && (

@@ -60,6 +60,7 @@ export default function Page() {
 
   useEffect(() => {
     setIsAtTheEnd(false);
+    window.scrollTo(0, 0);
   }, [searchParams]);
 
   if (error) {

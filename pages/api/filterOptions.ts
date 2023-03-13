@@ -28,6 +28,15 @@ export default async function getFilterOptions(
       orderBy: { process_category: 'asc' },
     });
     return res.status(200).json(response);
+  } else if (category === 'roaster') {
+    const response = await prisma.products.findMany({
+      select: {
+        brand: true,
+      },
+      distinct: 'brand',
+      orderBy: { brand: 'asc' },
+    });
+    return res.status(200).json(response);
   }
   return res.status(400).send('Bad Request');
 }

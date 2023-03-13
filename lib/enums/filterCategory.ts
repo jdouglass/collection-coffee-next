@@ -5,4 +5,5 @@ export enum FilterCategory {
   Process = 'Process',
   Country = 'Country',
   Variety = 'Variety',
+  Roaster = 'Roaster',
 }

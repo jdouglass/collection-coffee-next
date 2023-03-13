@@ -14,6 +14,7 @@ const FilterBar: React.FC<IFilterBar> = () => {
       </div>
       <div className="mt-3">
         <SortSelect />
+        <FilterDisclosure section={FilterCategory.Roaster} />
         <FilterDisclosure section={FilterCategory.Vendor} />
         <FilterDisclosure section={FilterCategory.Process} />
         <FilterDisclosure section={FilterCategory.Country} />

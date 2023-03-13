@@ -45,6 +45,9 @@ export default async function getProducts(
       where: {
         AND: [
           {
+            brand: {
+              in: req.query.Roaster,
+            },
             vendor: {
               in: req.query.Vendor,
             },

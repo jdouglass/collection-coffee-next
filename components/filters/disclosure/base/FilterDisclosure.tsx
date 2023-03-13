@@ -31,6 +31,10 @@ async function getFilterOptions(category: string): Promise<string[]> {
     return res.json().then((options) => {
       return options.map((elements: any) => elements.process_category);
     });
+  } else if (category === FilterCategory.Roaster) {
+    return res.json().then((options) => {
+      return options.map((elements: any) => elements.brand);
+    });
   }
   return res.json().then((options) => {
     const varietySet = new Set<string>();
@@ -87,18 +91,21 @@ const FilterDisclosure: React.FC<IFilterDisclosure> = ({ section }) => {
                 <div>Loading...</div>
               ) : (
                 filterOptions.data.map((option) => (
-                  <span key={option} className="flex items-center">
+                  <span
+                    key={`${section} ${option}`}
+                    className="flex items-center"
+                  >
                     <input
-                      id={option}
+                      id={`${section} ${option}`}
                       type="checkbox"
                       value={option}
-                      name={option}
+                      name={`${section} ${option}`}
                       className="h-4 w-4 rounded border-gray-300 pr-2 text-indigo-600 hover:cursor-pointer focus:ring-0 focus:ring-offset-0"
                       onChange={(e) => handleSelectedChange(e)}
                       checked={params.getAll(section).includes(option)}
                     />
                     <label
-                      htmlFor={option}
+                      htmlFor={`${section} ${option}`}
                       className="grow items-center px-4 pl-2 text-sm text-gray-600 hover:cursor-pointer"
                     >
                       {option}

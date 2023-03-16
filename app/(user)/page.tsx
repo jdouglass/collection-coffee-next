@@ -4,26 +4,22 @@ import ExploreTheCollectionButton from '../../components/buttons/exploreTheColle
 import LandingFeatures from '../../components/featuresSections/landingFeatures/LandingFeatures';
 import Hero from '../../components/hero/Hero';
 import LandingStatsContainer from '../../components/stats/LandingStatsContainer';
+import { LandingPageStats } from '../../typings';
 
-async function getCount(type?: string): Promise<number> {
-  const API_BASE_URL = process.env.API_BASE_URL as string;
-  if (type === 'brand' || type === 'vendor') {
-    const res = await fetch(
-      `${API_BASE_URL}/api/landingPageStats?type=${type}`,
-      { next: { revalidate: 60 } }
-    );
-    return res.json();
-  }
+async function getCount(): Promise<LandingPageStats> {
+  const API_BASE_URL = process.env.API_BASE_URL!;
   const res = await fetch(`${API_BASE_URL}/api/landingPageStats`, {
-    next: { revalidate: 60 },
+    cache: 'no-store',
   });
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data');
+  }
   return res.json();
 }
 
 export default async function Page() {
-  const totalProducts = await getCount();
-  const totalVendors = await getCount('vendor');
-  const totalBrands = await getCount('brand');
+  const landingPageStats = await getCount();
 
   return (
     <>
@@ -32,9 +28,9 @@ export default async function Page() {
         <div className="mx-auto max-w-5xl pt-56">
           <Hero />
           <LandingStatsContainer
-            totalProducts={totalProducts}
-            totalVendors={totalVendors}
-            totalBrands={totalBrands}
+            totalProducts={landingPageStats.totalProducts}
+            totalVendors={landingPageStats.totalVendors}
+            totalBrands={landingPageStats.totalRoasters}
           />
           <LandingFeatures />
           <ExploreTheCollectionButton />

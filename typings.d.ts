@@ -74,3 +74,9 @@ export interface EmailData {
   subject: string;
   message: string;
 }
+
+export interface LandingPageStats {
+  totalProducts: number;
+  totalVendors: number;
+  totalRoasters: number;
+}

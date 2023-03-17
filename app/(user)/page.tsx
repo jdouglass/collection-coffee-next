@@ -22,7 +22,7 @@ export default async function Page() {
   const landingPageStats = await getCount();
 
   return (
-    <>
+    <div>
       <LeftSideGradient />
       <div className="relative px-6 lg:px-8">
         <div className="mx-auto max-w-5xl pt-56">
@@ -37,6 +37,6 @@ export default async function Page() {
         </div>
         <RightSideGradient />
       </div>
-    </>
+    </div>
   );
 }

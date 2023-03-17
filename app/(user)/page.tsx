@@ -9,7 +9,8 @@ import { LandingPageStats } from '../../typings';
 async function getCount(): Promise<LandingPageStats> {
   const API_BASE_URL = process.env.API_BASE_URL!;
   const res = await fetch(`${API_BASE_URL}/api/landingPageStats`, {
-    cache: 'no-cache',
+    cache: 'no-store',
+    next: { revalidate: 900 },
   });
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary

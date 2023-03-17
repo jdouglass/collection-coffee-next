@@ -43,7 +43,7 @@ async function getFilterOptions(category: string): Promise<string[]> {
         varietySet.add(element);
       });
     });
-    return Array.from(varietySet);
+    return Array.from(varietySet).sort();
   });
 }
 

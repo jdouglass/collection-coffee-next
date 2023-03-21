@@ -9,7 +9,8 @@ export default async function getFilterOptions(
   if (
     category === 'vendor' ||
     category === 'variety' ||
-    category === 'country'
+    category === 'country' ||
+    category === 'tasting_notes'
   ) {
     const response = await prisma.products.findMany({
       select: {

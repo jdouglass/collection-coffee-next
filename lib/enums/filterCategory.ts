@@ -6,4 +6,5 @@ export enum FilterCategory {
   Country = 'Country',
   Variety = 'Variety',
   Roaster = 'Roaster',
+  TastingNotes = 'Tasting Notes',
 }

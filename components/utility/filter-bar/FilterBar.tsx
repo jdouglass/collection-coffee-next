@@ -19,6 +19,7 @@ const FilterBar: React.FC<IFilterBar> = () => {
         <FilterDisclosure section={FilterCategory.Process} />
         <FilterDisclosure section={FilterCategory.Country} />
         <FilterDisclosure section={FilterCategory.Variety} />
+        <FilterDisclosure section={FilterCategory.TastingNotes} />
       </div>
     </section>
   );

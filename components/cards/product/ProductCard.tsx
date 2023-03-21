@@ -14,6 +14,7 @@ export interface IProductCard {
   date_added: Date;
   vendor: string;
   handle: string;
+  tasting_notes: string[];
 }
 
 const ProductCard: React.FC<IProductCard> = ({
@@ -28,6 +29,7 @@ const ProductCard: React.FC<IProductCard> = ({
   image_url,
   sold_out,
   vendor,
+  tasting_notes,
 }) => {
   return (
     <div className="w-full max-w-80 xs:max-w-xs h-full bg-white p-2 border shadow-sm border-gray-200">
@@ -83,6 +85,12 @@ const ProductCard: React.FC<IProductCard> = ({
           <p className="text-xs text-gray-400">Variety</p>
           <p className="text-sm mb-2 line-clamp-2">
             {variety ? variety.join(', ') : 'Unknown'}
+          </p>
+        </div>
+        <div>
+          <p className="text-xs text-gray-400">Tasting Notes</p>
+          <p className="text-sm mb-2 line-clamp-2">
+            {tasting_notes ? tasting_notes.join(', ') : 'Unknown'}
           </p>
         </div>
       </div>

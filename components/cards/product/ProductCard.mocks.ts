@@ -16,6 +16,7 @@ const base: IProductCard = {
   vendor: 'Monogram',
   date_added: new Date(),
   handle: 'florestales-filter',
+  tasting_notes: ['Floral', 'Citrus'],
 };
 
 export const mockProductCardProps = {

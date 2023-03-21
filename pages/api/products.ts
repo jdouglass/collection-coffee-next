@@ -33,9 +33,9 @@ export default async function getProducts(
         })
       : undefined;
 
-    const tasting_notes = req.query.TastingNotes
+    const tasting_notes = req.query['Tasting Notes']
       ? Prisma.validator<Prisma.StringNullableListFilter>()({
-          hasSome: req.query.TastingNotes,
+          hasSome: req.query['Tasting Notes'],
         })
       : undefined;
 

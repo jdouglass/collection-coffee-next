@@ -31,6 +31,7 @@ const FilterBarMobile: React.FC<IFilterBarMobile> = () => {
         <FilterDisclosure section={FilterCategory.Process} />
         <FilterDisclosure section={FilterCategory.Country} />
         <FilterDisclosure section={FilterCategory.Variety} />
+        <FilterDisclosure section={FilterCategory.TastingNotes} />
       </div>
     </div>
   );

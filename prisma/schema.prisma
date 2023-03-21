@@ -27,5 +27,6 @@ model products {
   date_added       DateTime @db.Timestamp()
   vendor           String   @db.Text
   handle           String   @db.Text
+  tasting_notes    String[] @db.Text
 }
 

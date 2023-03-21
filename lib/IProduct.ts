@@ -13,4 +13,5 @@ export interface IProduct {
   date_added: Date;
   vendor: string;
   handle: string;
+  tasting_notes: string[];
 }

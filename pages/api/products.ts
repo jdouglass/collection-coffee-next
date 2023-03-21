@@ -33,6 +33,12 @@ export default async function getProducts(
         })
       : undefined;
 
+    const tasting_notes = req.query.TastingNotes
+      ? Prisma.validator<Prisma.StringNullableListFilter>()({
+          hasSome: req.query.TastingNotes,
+        })
+      : undefined;
+
     const limit = 12;
     const cursor = req.query.cursor ?? '';
     const cursorObj =
@@ -58,6 +64,7 @@ export default async function getProducts(
               in: req.query.Country,
             },
             variety,
+            tasting_notes,
           },
         ],
       },
@@ -81,6 +88,7 @@ export default async function getProducts(
         date_added: product.date_added,
         vendor: product.vendor,
         handle: product.handle,
+        tasting_notes: product.tasting_notes,
       };
       products.push(addedProduct);
     }

@@ -1,7 +1,6 @@
 import { AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
 import { FilterCategory } from '../../../lib/enums/filterCategory';
 import FilterDisclosure from '../../filters/disclosure/base/FilterDisclosure';
-import SortSelect from '../../filters/select/sort/SortSelect';
 
 export interface IFilterBar {}
 
@@ -13,7 +12,6 @@ const FilterBar: React.FC<IFilterBar> = () => {
         <h1>Filters</h1>
       </div>
       <div className="mt-3">
-        <SortSelect />
         <FilterDisclosure section={FilterCategory.Roaster} />
         <FilterDisclosure section={FilterCategory.Vendor} />
         <FilterDisclosure section={FilterCategory.Process} />

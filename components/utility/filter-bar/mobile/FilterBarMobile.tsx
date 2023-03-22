@@ -25,7 +25,9 @@ const FilterBarMobile: React.FC<IFilterBarMobile> = () => {
         </button>
       </div>
       <div className="mt-3">
-        <SortSelect />
+        <div className="pl-3">
+          <SortSelect />
+        </div>
         <FilterDisclosure section={FilterCategory.Roaster} />
         <FilterDisclosure section={FilterCategory.Vendor} />
         <FilterDisclosure section={FilterCategory.Process} />

@@ -13,10 +13,19 @@ export default async function getProductResultsCount(
         })
       : undefined;
 
+    const tasting_notes = req.query['Tasting Notes']
+      ? Prisma.validator<Prisma.StringNullableListFilter>()({
+          hasSome: req.query['Tasting Notes'],
+        })
+      : undefined;
+
     const productCount = await prisma.products.count({
       where: {
         AND: [
           {
+            brand: {
+              in: req.query.Roaster,
+            },
             vendor: {
               in: req.query.Vendor,
             },
@@ -27,6 +36,7 @@ export default async function getProductResultsCount(
               in: req.query.Country,
             },
             variety,
+            tasting_notes,
           },
         ],
       },

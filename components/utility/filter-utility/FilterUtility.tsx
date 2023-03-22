@@ -6,6 +6,7 @@ import { useSearchParams } from 'next/navigation';
 import useSWR from 'swr';
 import useScroll from '../../../lib/hooks/useScroll';
 import { mobileFilters } from '../../../lib/store';
+import SortSelect from '../../filters/select/sort/SortSelect';
 
 export interface IFilterUtility {}
 
@@ -30,12 +31,15 @@ const FilterUtility: React.FC<IFilterUtility> = () => {
 
   return (
     <section
-      className={`grid grid-cols-2 bg-white w-full items-center sticky top-20 py-3 ${
+      className={`grid max-md:grid-cols-2 xl:grid-cols-2 grid-cols-3 bg-white w-full items-center sticky top-20 py-3 ${
         scrolled ? 'border-b border-gray-200' : 'bg-white'
       }
       `}
     >
-      <span className="flex">
+      <div className="pl-5 min-w-fit w-fit max-md:hidden">
+        <SortSelect />
+      </div>
+      <span className="flex xl:justify-end justify-center xl:pr-5 max-md:justify-start">
         <p className="flex text-blue-500 pl-4 font-semibold">
           {productCount.data ? productCount.data : 0}
         </p>

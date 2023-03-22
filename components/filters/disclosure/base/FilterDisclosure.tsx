@@ -3,6 +3,7 @@
 import { Disclosure } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useState } from 'react';
 import useSWR from 'swr';
 import { FilterCategory } from '../../../../lib/enums/filterCategory';
 
@@ -73,10 +74,14 @@ const FilterDisclosure: React.FC<IFilterDisclosure> = ({ section }) => {
   const pathname = usePathname() as string;
   const searchParams = useSearchParams();
   const params = new URLSearchParams(searchParams!.toString());
+  const [checkedCount, setCheckedCount] = useState<number>(
+    params.getAll(section).length
+  );
 
   const handleSelectedChange = (e: any) => {
     if (!params.getAll(section).includes(e.target.value)) {
       params.append(section, e.target.value);
+      setCheckedCount(checkedCount + 1);
     } else {
       const options = params
         .getAll(section)
@@ -85,24 +90,34 @@ const FilterDisclosure: React.FC<IFilterDisclosure> = ({ section }) => {
       for (const option of options) params.append(section, option);
     }
     router.push(`${pathname}?${params.toString()}`);
+    setCheckedCount(params.getAll(section).length);
   };
 
   return (
-    <Disclosure as="div" className="border-b border-gray-200 bg-white py-4">
+    <Disclosure as="div" className="border-b border-gray-200 bg-white">
       {({ open }) => (
         <>
-          <Disclosure.Button className="flex w-full items-center justify-between bg-white py-2 text-sm text-gray-400 hover:text-gray-500">
+          <Disclosure.Button className="flex w-full items-center justify-between bg-white py-6 pl-3 text-sm text-gray-400 hover:text-gray-500 hover:bg-slate-50">
             <span className="font-medium text-gray-900">{section}</span>
-            <ChevronDownIcon
-              className={`${
-                open
-                  ? 'rotate-180 transform duration-300'
-                  : 'transform duration-300'
-              } mr-2 h-5 w-5 text-gray-500`}
-            />
+            <div>
+              <div className="flex">
+                {checkedCount ? (
+                  <div className="bg-rose-100 w-6 h-4 rounded-full border border-red-500 text-red-700 font-semibold text-xs flex items-center justify-center mr-3">
+                    {checkedCount}
+                  </div>
+                ) : undefined}
+                <ChevronDownIcon
+                  className={`${
+                    open
+                      ? 'rotate-180 transform duration-300'
+                      : 'transform duration-300'
+                  } mr-2 h-5 w-5 text-gray-500`}
+                />
+              </div>
+            </div>
           </Disclosure.Button>
           <Disclosure.Panel className="pt-4 pl-3">
-            <div className="space-y-2">
+            <div className="space-y-2 pb-6">
               {!filterOptions.data ? (
                 <div>Loading...</div>
               ) : (

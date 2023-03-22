@@ -3,6 +3,11 @@ import Header from '../../components/navigation/header/Header';
 
 import '../globals.css';
 
+export const metadata = {
+  title: 'Collection Coffee',
+  description: 'Discover coffee beans from around the world, all in one place!',
+};
+
 export default function RootLayout({
   children,
 }: {

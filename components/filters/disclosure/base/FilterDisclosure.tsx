@@ -79,8 +79,7 @@ const FilterDisclosure: React.FC<IFilterDisclosure> = ({ section }) => {
   const [checkedCount, setCheckedCount] = useState<number>(
     params.getAll(section).length
   );
-  const [filtersBeingUsedState, setfiltersBeingUsedState] =
-    useAtom(filtersBeingUsed);
+  const [, setfiltersBeingUsedState] = useAtom(filtersBeingUsed);
 
   useEffect(() => {
     if (!searchParams!.toString().length) {

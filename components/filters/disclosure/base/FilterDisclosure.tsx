@@ -2,10 +2,12 @@
 
 import { Disclosure } from '@headlessui/react';
 import { ChevronDownIcon } from '@heroicons/react/20/solid';
+import { useAtom } from 'jotai';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { FilterCategory } from '../../../../lib/enums/filterCategory';
+import { filtersBeingUsed } from '../../../../lib/store';
 
 export interface IFilterDisclosure {
   section: string;
@@ -77,10 +79,19 @@ const FilterDisclosure: React.FC<IFilterDisclosure> = ({ section }) => {
   const [checkedCount, setCheckedCount] = useState<number>(
     params.getAll(section).length
   );
+  const [filtersBeingUsedState, setfiltersBeingUsedState] =
+    useAtom(filtersBeingUsed);
+
+  useEffect(() => {
+    if (!searchParams!.toString().length) {
+      setCheckedCount(0);
+    }
+  }, [searchParams]);
 
   const handleSelectedChange = (e: any) => {
     if (!params.getAll(section).includes(e.target.value)) {
       params.append(section, e.target.value);
+      setfiltersBeingUsedState(true);
       setCheckedCount(checkedCount + 1);
     } else {
       const options = params
@@ -88,6 +99,7 @@ const FilterDisclosure: React.FC<IFilterDisclosure> = ({ section }) => {
         .filter((value) => value !== e.target.value);
       params.delete(section);
       for (const option of options) params.append(section, option);
+      setCheckedCount(params.getAll(section).length);
     }
     router.push(`${pathname}?${params.toString()}`);
     setCheckedCount(params.getAll(section).length);

@@ -1,12 +1,14 @@
 import Iframe from 'sanity-plugin-iframe-pane';
+import { SEOPane } from 'sanity-plugin-seo-pane';
 import type { DefaultDocumentNodeResolver } from 'sanity/desk';
+import { resolveProductionUrl } from './resolveProductionUrl';
 
 // Import this into the deskTool() plugin
 export const defaultDocumentNode: DefaultDocumentNodeResolver = (
   S,
   { schemaType }
 ) => {
-  // Only show preview pane on `movie` schema type documents
+  // Only show preview pane on `post` schema type documents
   switch (schemaType) {
     case 'post':
       return S.document().views([
@@ -21,6 +23,15 @@ export const defaultDocumentNode: DefaultDocumentNodeResolver = (
             reload: { button: true },
           })
           .title('Preview'),
+        S.view
+          .component(SEOPane)
+          .options({
+            // Retrieve the keywords and synonyms at the given dot-notated strings
+            keywords: `seo.keywords`,
+            synonyms: `seo.synonyms`,
+            url: (doc: any) => resolveProductionUrl(doc),
+          })
+          .title('SEO'),
       ]);
     default:
       return S.document().views([S.view.form()]);

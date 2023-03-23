@@ -13,6 +13,16 @@ type Props = {
   };
 };
 
+export async function generateMetadata({ params: { slug } }: Props) {
+  return {
+    alternates: {
+      canonical: `${
+        process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000'
+      }/${slug}`,
+    },
+  };
+}
+
 export const revalidate = 60;
 
 export async function generateStaticParams() {

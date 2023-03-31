@@ -1,9 +1,8 @@
 import { groq } from 'next-sanity';
 import { previewData } from 'next/headers';
-import PreviewResourcePage from '../../../../components/PreviewResourcePage';
+import { lazy } from 'react';
 import PreviewSuspense from '../../../../components/PreviewSuspense';
-import { ResourcePage } from '../../../../components/ResourcePage';
-import { client } from '../../../../lib/sanity.client';
+import { client, getClient } from '../../../../lib/sanity.client';
 import { Post } from '../../../../typings';
 
 type Props = {
@@ -11,6 +10,8 @@ type Props = {
     slug: string;
   };
 };
+
+const ResourcePage = lazy(() => import('../../../../components/ResourcePage'));
 
 export async function generateMetadata({ params: { slug } }: Props) {
   return {
@@ -46,6 +47,11 @@ export default async function Page({ params: { slug } }: Props) {
     }
   `;
 
+  const post: Post = await getClient(previewData() ? true : false).fetch(
+    query,
+    { slug }
+  );
+
   if (previewData()) {
     return (
       <PreviewSuspense
@@ -57,12 +63,10 @@ export default async function Page({ params: { slug } }: Props) {
           </div>
         }
       >
-        <PreviewResourcePage query={query} />
+        {post && <ResourcePage post={post} />}
       </PreviewSuspense>
     );
   }
-
-  const post: Post = await client.fetch(query, { slug });
 
   return post && <ResourcePage post={post} />;
 }

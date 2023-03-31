@@ -5,15 +5,14 @@ import { Post } from '../../../typings';
 
 export interface IResourceCard {
   post: Post;
-  aspect: string;
 }
 
-const ResourceCard: React.FC<IResourceCard> = ({ post, aspect }) => {
+const ResourceCard: React.FC<IResourceCard> = ({ post }) => {
   return (
     <Link href={`/resources/${post.slug.current}`}>
       <div key={post._id} className="cursor-pointer group">
         <div
-          className={`relative overflow-hidden transition-all bg-gray-100 rounded-md dark:bg-gray-800 hover:scale-105 aspect-${aspect}`}
+          className={`relative overflow-hidden transition-all bg-gray-100 rounded-md dark:bg-gray-800 hover:scale-105 aspect-video`}
         >
           <Image
             className="object-cover w-full rounded-lg"

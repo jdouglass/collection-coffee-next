@@ -9,7 +9,7 @@ type Props = {
   post: Post;
 };
 
-export function ResourcePage({ post }: Props) {
+export default function ResourcePage({ post }: Props) {
   return (
     <div className="px-8 py-5 lg:py-8 mx-auto xl:px-5 max-w-screen-lg !pt-0">
       <div className="max-w-screen-md mx-auto">

@@ -4,6 +4,8 @@ export function resolveProductionUrl(doc: any) {
     ? doc?.slug?.current
     : doc?.store?.slug?.current;
 
+  console.log(slug);
+
   if (!slug) {
     throw new Error(`Document has no slug, cannot preview`);
   }
@@ -25,6 +27,8 @@ export function resolveProductionUrl(doc: any) {
   }
 
   url.searchParams.set(`preview`, `true`);
+
+  console.log(url.toString());
 
   return url.toString();
 }

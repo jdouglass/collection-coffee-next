@@ -5,8 +5,8 @@ const prisma = new PrismaClient();
 
 async function main() {
   await prisma.products.deleteMany({});
-  const PROD_BASE_URL = process.env.PROD_BASE_URL as string;
-  const products = await axios<products[]>(`${PROD_BASE_URL}/api/seedDb`);
+  const BASE_URL = process.env.BASE_URL as string;
+  const products = await axios<products[]>(`${BASE_URL}/api/seedDb`);
 
   const addProducts: () => Promise<any> = async () =>
     await prisma.products.createMany({ data: products.data });

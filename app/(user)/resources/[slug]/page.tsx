@@ -16,9 +16,7 @@ const ResourcePage = lazy(() => import('../../../../components/ResourcePage'));
 export async function generateMetadata({ params: { slug } }: Props) {
   return {
     alternates: {
-      canonical: `${
-        process.env.NEXT_PUBLIC_VERCEL_URL || 'http://localhost:3000'
-      }/${slug}`,
+      canonical: `${process.env.BASE_URL || 'http://localhost:3000'}/${slug}`,
     },
   };
 }

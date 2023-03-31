@@ -1,5 +1,5 @@
 const localUrl = `http://localhost:3000`;
-const remoteUrl = `${process.env.NEXT_PUBLIC_VERCEL_URL}`;
+const remoteUrl = `${process.env.BASE_URL!}`;
 const baseUrl =
   window?.location?.hostname === 'localhost' ? localUrl : remoteUrl;
 

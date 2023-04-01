@@ -20,6 +20,21 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'seo',
+      title: 'SEO',
+      type: 'object',
+      fields: [
+        defineField({
+          name: 'keywords',
+          type: 'string',
+        }),
+        defineField({
+          name: 'synonyms',
+          type: 'string',
+        }),
+      ],
+    }),
+    defineField({
       name: 'description',
       title: 'Description',
       type: 'string',

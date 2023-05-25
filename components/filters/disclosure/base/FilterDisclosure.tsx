@@ -16,11 +16,9 @@ export interface IFilterDisclosure {
 async function getFilterOptions(category: string): Promise<string[]> {
   const API_BASE_URL = process.env.API_BASE_URL as string;
   const res = await fetch(
-    `${API_BASE_URL}/api/filterOptions?category=${
-      category !== FilterCategory.TastingNotes
-        ? category.toLowerCase()
-        : 'tasting_notes'
-    }`,
+    `${API_BASE_URL}/api/filterOptions?category=${category
+      .toLowerCase()
+      .replaceAll(' ', '_')}`,
     {
       cache: 'no-store',
     }
@@ -33,6 +31,10 @@ async function getFilterOptions(category: string): Promise<string[]> {
       return options.map((elements: any) => {
         return elements[category.toLowerCase()];
       });
+    });
+  } else if (category === FilterCategory.VendorLocation) {
+    return res.json().then((options) => {
+      return options.map((elements: any) => elements.vendor_location);
     });
   } else if (category === FilterCategory.Process) {
     return res.json().then((options) => {
@@ -65,11 +67,9 @@ async function getFilterOptions(category: string): Promise<string[]> {
 const FilterDisclosure: React.FC<IFilterDisclosure> = ({ section }) => {
   const fetcher = () => getFilterOptions(section);
   const filterOptions = useSWR(
-    `/api/filterOptions?category=${
-      section !== FilterCategory.TastingNotes
-        ? section.toLowerCase()
-        : 'tasting_notes'
-    }`,
+    `/api/filterOptions?category=${section
+      .toLowerCase()
+      .replaceAll(' ', '_')!}`,
     fetcher
   );
   const router = useRouter();

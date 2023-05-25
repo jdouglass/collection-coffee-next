@@ -17,6 +17,7 @@ const base: IProductCard = {
   date_added: new Date(),
   handle: 'florestales-filter',
   tasting_notes: ['Floral', 'Citrus'],
+  default_currency: 'CAD',
 };
 
 export const mockProductCardProps = {

@@ -18,6 +18,7 @@ const FilterBar: React.FC<IFilterBar> = () => {
       <div className="mt-3">
         <FilterDisclosure section={FilterCategory.Roaster} />
         <FilterDisclosure section={FilterCategory.Vendor} />
+        <FilterDisclosure section={FilterCategory.VendorLocation} />
         <FilterDisclosure section={FilterCategory.Process} />
         <FilterDisclosure section={FilterCategory.Country} />
         <FilterDisclosure section={FilterCategory.Variety} />

@@ -15,6 +15,7 @@ export interface IProductCard {
   vendor: string;
   handle: string;
   tasting_notes: string[];
+  default_currency: string;
 }
 
 const ProductCard: React.FC<IProductCard> = ({
@@ -30,11 +31,19 @@ const ProductCard: React.FC<IProductCard> = ({
   sold_out,
   vendor,
   tasting_notes,
+  default_currency,
 }) => {
   return (
     <div className="w-full max-w-80 xs:max-w-xs h-full bg-white p-2 border shadow-sm border-gray-200">
       <a href={product_url} target="_blank" rel="noopener noreferrer">
         <div className="flex justify-center h-60 w-full">
+          {sold_out ? (
+            <div className="relative">
+              <span className="absolute text-center w-max m-2 bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded-lg border border-rose-300 shadow-sm z-0">
+                Sold Out
+              </span>
+            </div>
+          ) : null}
           <Image
             className={`${
               brand === 'Monogram' ||
@@ -56,15 +65,9 @@ const ProductCard: React.FC<IProductCard> = ({
         <p className="mb-1 text-xs text-gray-400">Sold by {vendor}</p>
         <div className="mb-2 flex justify-between">
           <p className="text-sm align-middle">{brand}</p>
-          {sold_out ? (
-            <span className="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded-lg">
-              Sold Out
-            </span>
-          ) : (
-            <p className="align middle text-sm">
-              ${price} for {weight}g
-            </p>
-          )}
+          <p className="align middle text-sm">
+            {default_currency} ${price} for {weight}g
+          </p>
         </div>
         <div>
           <a href={product_url} target="_blank" rel="noopener noreferrer">

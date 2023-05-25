@@ -36,6 +36,7 @@ const FilterBarMobile: React.FC<IFilterBarMobile> = () => {
         </div>
         <FilterDisclosure section={FilterCategory.Roaster} />
         <FilterDisclosure section={FilterCategory.Vendor} />
+        <FilterDisclosure section={FilterCategory.VendorLocation} />
         <FilterDisclosure section={FilterCategory.Process} />
         <FilterDisclosure section={FilterCategory.Country} />
         <FilterDisclosure section={FilterCategory.Variety} />

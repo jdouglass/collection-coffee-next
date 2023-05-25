@@ -65,6 +65,9 @@ export default async function getProducts(
             },
             variety,
             tasting_notes,
+            vendor_location: {
+              in: req.query['Vendor Location'],
+            },
           },
         ],
       },
@@ -89,6 +92,8 @@ export default async function getProducts(
         vendor: product.vendor,
         handle: product.handle,
         tasting_notes: product.tasting_notes,
+        vendor_location: product.vendor_location as string,
+        default_currency: product.default_currency as string,
       };
       products.push(addedProduct);
     }

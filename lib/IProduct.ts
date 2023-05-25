@@ -14,4 +14,6 @@ export interface IProduct {
   vendor: string;
   handle: string;
   tasting_notes: string[];
+  vendor_location: string;
+  default_currency: string;
 }

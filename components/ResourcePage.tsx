@@ -11,7 +11,10 @@ type Props = {
 
 export default function ResourcePage({ post }: Props) {
   return (
-    <div className="px-8 py-5 lg:py-8 mx-auto xl:px-5 max-w-screen-lg !pt-0">
+    <div
+      data-content="main"
+      className="px-8 py-5 lg:py-8 mx-auto xl:px-5 max-w-screen-lg !pt-0"
+    >
       <div className="max-w-screen-md mx-auto">
         <div className="flex justify-center pt-5">
           {post.categories.map((category) => (

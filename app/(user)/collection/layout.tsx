@@ -64,7 +64,7 @@ export default function CollectionLayout({
               leaveTo="translate-x-full"
             >
               <Dialog.Panel className="relative ml-auto flex h-full w-full max-w-xs flex-col overflow-y-auto bg-white py-4 pb-12 shadow-xl">
-                <FilterBarMobile />
+                <FilterBarMobile productCounts={productCounts.data!} />
               </Dialog.Panel>
             </Transition.Child>
           </div>

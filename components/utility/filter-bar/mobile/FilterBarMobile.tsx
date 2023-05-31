@@ -3,14 +3,17 @@
 import { XMarkIcon } from '@heroicons/react/20/solid';
 import { useAtom } from 'jotai';
 import { FilterCategory } from '../../../../lib/enums/filterCategory';
+import { ICombinedResultsCount } from '../../../../lib/ICombinedResultsCounts';
 import { mobileFilters } from '../../../../lib/store';
 import ClearFiltersButton from '../../../buttons/clearFilters/ClearFiltersButton';
 import FilterDisclosure from '../../../filters/disclosure/base/FilterDisclosure';
 import SortSelect from '../../../filters/select/sort/SortSelect';
 
-export interface IFilterBarMobile {}
+export interface IFilterBarMobile {
+  productCounts: ICombinedResultsCount;
+}
 
-const FilterBarMobile: React.FC<IFilterBarMobile> = () => {
+const FilterBarMobile: React.FC<IFilterBarMobile> = ({ productCounts }) => {
   const [, setViewMobileFilters] = useAtom(mobileFilters);
   return (
     <div className="px-4">
@@ -34,13 +37,34 @@ const FilterBarMobile: React.FC<IFilterBarMobile> = () => {
         <div className="pl-3">
           <SortSelect />
         </div>
-        <FilterDisclosure section={FilterCategory.Roaster} />
-        <FilterDisclosure section={FilterCategory.Vendor} />
-        <FilterDisclosure section={FilterCategory.VendorLocation} />
-        <FilterDisclosure section={FilterCategory.Process} />
-        <FilterDisclosure section={FilterCategory.Country} />
-        <FilterDisclosure section={FilterCategory.Variety} />
-        <FilterDisclosure section={FilterCategory.TastingNotes} />
+        <FilterDisclosure
+          section={FilterCategory.Roaster}
+          productCounts={productCounts}
+        />
+        <FilterDisclosure
+          section={FilterCategory.Vendor}
+          productCounts={productCounts}
+        />
+        <FilterDisclosure
+          section={FilterCategory.VendorLocation}
+          productCounts={productCounts}
+        />
+        <FilterDisclosure
+          section={FilterCategory.Process}
+          productCounts={productCounts}
+        />
+        <FilterDisclosure
+          section={FilterCategory.Country}
+          productCounts={productCounts}
+        />
+        <FilterDisclosure
+          section={FilterCategory.Variety}
+          productCounts={productCounts}
+        />
+        <FilterDisclosure
+          section={FilterCategory.TastingNotes}
+          productCounts={productCounts}
+        />
       </div>
     </div>
   );

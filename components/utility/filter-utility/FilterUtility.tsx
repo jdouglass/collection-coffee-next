@@ -5,12 +5,15 @@ import { useAtom } from 'jotai';
 import { useSearchParams } from 'next/navigation';
 import useSWR from 'swr';
 import useScroll from '../../../lib/hooks/useScroll';
+import { ICombinedResultsCount } from '../../../lib/ICombinedResultsCounts';
 import { mobileFilters } from '../../../lib/store';
 import SortSelect from '../../filters/select/sort/SortSelect';
 
 export interface IFilterUtility {}
 
-const getProductCount = async (searchParams: string): Promise<number> => {
+const getProductCount = async (
+  searchParams: string
+): Promise<ICombinedResultsCount> => {
   const API_BASE_URL = process.env.API_BASE_URL as string;
   const res = await fetch(
     `${API_BASE_URL}/api/productResultsCount?${searchParams}`,
@@ -41,7 +44,7 @@ const FilterUtility: React.FC<IFilterUtility> = () => {
       </div>
       <span className="flex xl:justify-end justify-center xl:pr-5 max-md:justify-start">
         <p className="flex pl-4 font-semibold">
-          {productCount.data ? productCount.data : 0}
+          {productCount.data?.total ? productCount.data.total : 0}
         </p>
         <p className="pl-2">products found</p>
       </span>

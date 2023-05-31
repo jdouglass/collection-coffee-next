@@ -7,10 +7,12 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import { FilterCategory } from '../../../../lib/enums/filterCategory';
+import { ICombinedResultsCount } from '../../../../lib/ICombinedResultsCounts';
 import { filtersBeingUsed } from '../../../../lib/store';
 
 export interface IFilterDisclosure {
   section: string;
+  productCounts: ICombinedResultsCount;
 }
 
 async function getFilterOptions(category: string): Promise<string[]> {
@@ -64,7 +66,10 @@ async function getFilterOptions(category: string): Promise<string[]> {
   });
 }
 
-const FilterDisclosure: React.FC<IFilterDisclosure> = ({ section }) => {
+const FilterDisclosure: React.FC<IFilterDisclosure> = ({
+  section,
+  productCounts,
+}) => {
   const fetcher = () => getFilterOptions(section);
   const filterOptions = useSWR(
     `/api/filterOptions?category=${section
@@ -128,7 +133,7 @@ const FilterDisclosure: React.FC<IFilterDisclosure> = ({ section }) => {
             </div>
           </Disclosure.Button>
           <Disclosure.Panel className="pt-4 pl-3">
-            <div className="space-y-2 pb-6">
+            <div className="space-y-3 pb-6">
               {!filterOptions.data ? (
                 <div>Loading...</div>
               ) : (
@@ -142,16 +147,33 @@ const FilterDisclosure: React.FC<IFilterDisclosure> = ({ section }) => {
                       type="checkbox"
                       value={option}
                       name={`${section} ${option}`}
-                      className="h-4 w-4 rounded border-gray-300 pr-2 text-indigo-600 hover:cursor-pointer focus:ring-0 focus:ring-offset-0"
+                      className="h-5 w-5 rounded border-gray-300 pr-2 text-indigo-600 hover:cursor-pointer focus:ring-0 focus:ring-offset-0"
                       onChange={(e) => handleSelectedChange(e)}
                       checked={params.getAll(section).includes(option)}
                     />
-                    <label
-                      htmlFor={`${section} ${option}`}
-                      className="grow items-center px-4 pl-2 text-sm text-gray-600 hover:cursor-pointer"
-                    >
-                      {option}
-                    </label>
+                    <div className="flex items-center w-full">
+                      <label
+                        htmlFor={`${section} ${option}`}
+                        className="grow items-center px-4 pl-2 text-xs text-gray-600 hover:cursor-pointer"
+                      >
+                        {option}
+                      </label>
+                      <div className="text-xs text-gray-600 justify-between pr-2">
+                        {!productCounts
+                          ? undefined
+                          : section !== FilterCategory.Process
+                          ? (productCounts as any)[
+                              section.toLowerCase().replaceAll(' ', '_')
+                            ][option]
+                            ? (productCounts as any)[
+                                section.toLowerCase().replaceAll(' ', '_')
+                              ][option]
+                            : 0
+                          : productCounts.process_category[option]
+                          ? productCounts.process_category[option]
+                          : 0}
+                      </div>
+                    </div>
                   </span>
                 ))
               )}

@@ -2,10 +2,24 @@
 
 import { Dialog, Transition } from '@headlessui/react';
 import { useAtom } from 'jotai';
+import { useSearchParams } from 'next/navigation';
 import { Fragment } from 'react';
+import useSWR from 'swr';
 import FilterBar from '../../../components/utility/filter-bar/FilterBar';
 import FilterBarMobile from '../../../components/utility/filter-bar/mobile/FilterBarMobile';
+import { ICombinedResultsCount } from '../../../lib/ICombinedResultsCounts';
 import { mobileFilters } from '../../../lib/store';
+
+const getProductCounts = async (
+  searchParams: string
+): Promise<ICombinedResultsCount> => {
+  const API_BASE_URL = process.env.API_BASE_URL as string;
+  const res = await fetch(
+    `${API_BASE_URL}/api/productResultsCount?${searchParams}`,
+    { cache: 'no-store' }
+  );
+  return res.json();
+};
 
 export default function CollectionLayout({
   children,
@@ -13,6 +27,12 @@ export default function CollectionLayout({
   children: React.ReactNode;
 }) {
   const [viewMobileFilers, setViewMobileFilters] = useAtom(mobileFilters);
+  const searchParams = useSearchParams();
+  const fetcher = () => getProductCounts(searchParams!.toString());
+  const productCounts = useSWR(
+    `/api/productResultsCount?${searchParams!.toString()}`,
+    fetcher
+  );
   return (
     <section className="max-w-screen-2xl mx-auto flex">
       <Transition.Root show={viewMobileFilers} as={Fragment}>
@@ -50,7 +70,7 @@ export default function CollectionLayout({
           </div>
         </Dialog>
       </Transition.Root>
-      <FilterBar />
+      <FilterBar productCounts={productCounts.data!} />
       <section className="w-full">{children}</section>
     </section>
   );

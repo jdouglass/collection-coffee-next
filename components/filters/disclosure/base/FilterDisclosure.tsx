@@ -9,6 +9,7 @@ import useSWR from 'swr';
 import { FilterCategory } from '../../../../lib/enums/filterCategory';
 import { ICombinedResultsCount } from '../../../../lib/ICombinedResultsCounts';
 import { filtersBeingUsed } from '../../../../lib/store';
+import LoadingSpinner from '../../../spinner/LoadingSpinner';
 
 export interface IFilterDisclosure {
   section: string;
@@ -159,19 +160,25 @@ const FilterDisclosure: React.FC<IFilterDisclosure> = ({
                         {option}
                       </label>
                       <div className="text-xs text-gray-600 justify-between pr-2">
-                        {!productCounts
-                          ? undefined
-                          : section !== FilterCategory.Process
-                          ? (productCounts as any)[
+                        {!productCounts ? (
+                          <div>
+                            <LoadingSpinner size={4} />
+                          </div>
+                        ) : section !== FilterCategory.Process ? (
+                          (productCounts as any)[
+                            section.toLowerCase().replaceAll(' ', '_')
+                          ][option] ? (
+                            (productCounts as any)[
                               section.toLowerCase().replaceAll(' ', '_')
                             ][option]
-                            ? (productCounts as any)[
-                                section.toLowerCase().replaceAll(' ', '_')
-                              ][option]
-                            : 0
-                          : productCounts.process_category[option]
-                          ? productCounts.process_category[option]
-                          : 0}
+                          ) : (
+                            0
+                          )
+                        ) : productCounts.process_category[option] ? (
+                          productCounts.process_category[option]
+                        ) : (
+                          0
+                        )}
                       </div>
                     </div>
                   </span>

@@ -36,7 +36,7 @@ export default function ResourcePage({ post }: Props) {
             src={urlFor(post.mainImage).url()}
             alt={'Thumbnail'}
             loading="eager"
-            className="object-cover"
+            className="object-contain"
             fill
           />
         </span>

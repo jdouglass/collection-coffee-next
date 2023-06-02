@@ -6,6 +6,9 @@ import '../globals.css';
 export const metadata = {
   title: 'Collection Coffee',
   description: 'Discover coffee beans from around the world, all in one place!',
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 export default function RootLayout({

@@ -34,7 +34,7 @@ const FilterUtility: React.FC<IFilterUtility> = () => {
 
   return (
     <section
-      className={`grid max-md:grid-cols-2 xl:grid-cols-2 grid-cols-3 bg-white w-full items-center sticky top-20 py-3 z-10 ${
+      className={`grid max-md:grid-cols-2 xl:grid-cols-2 grid-cols-3 bg-white w-full items-center sticky top-16 py-3 z-10 ${
         scrolled ? 'border-b border-gray-200' : 'bg-white'
       }
       `}

@@ -83,7 +83,7 @@ export default function Page() {
               type="text"
               id="name"
               name="name"
-              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
+              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5"
               required
               onChange={handleChange}
               value={values.name}
@@ -100,7 +100,7 @@ export default function Page() {
               type="email"
               id="email"
               name="email"
-              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
+              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5"
               required
               onChange={handleChange}
               value={values.email}
@@ -117,7 +117,7 @@ export default function Page() {
               type="text"
               id="subject"
               name="subject"
-              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5"
+              className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-700 focus:border-gray-700 block w-full p-2.5"
               placeholder="Let us know how we can help you"
               required
               onChange={handleChange}
@@ -135,7 +135,7 @@ export default function Page() {
               id="message"
               name="message"
               rows={6}
-              className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-indigo-500 focus:border-indigo-500"
+              className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg shadow-sm border border-gray-300 focus:ring-gray-700 focus:border-gray-700"
               placeholder="Leave a comment..."
               onChange={handleChange}
               value={values.message}

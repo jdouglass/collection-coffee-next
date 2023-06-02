@@ -10,7 +10,7 @@ export interface IFilterBar {
 
 const FilterBar: React.FC<IFilterBar> = ({ productCounts }) => {
   return (
-    <section className="h-[calc(100vh-80px)] float-left w-[340px] sticky bg-white overflow-auto hidden xl:block px-4 scrollbar top-20 pt-5">
+    <section className="h-[calc(100vh-64px)] float-left w-[340px] sticky bg-white overflow-auto hidden xl:block px-4 scrollbar top-16 pt-5">
       <div className="flex justify-between items-center">
         <div className="flex text-xl font-semibold text-gray-800 items-center space-x-1">
           <AdjustmentsHorizontalIcon className="h-5 w-5" />

@@ -148,7 +148,7 @@ const FilterDisclosure: React.FC<IFilterDisclosure> = ({
                       type="checkbox"
                       value={option}
                       name={`${section} ${option}`}
-                      className="h-5 w-5 rounded border-gray-300 pr-2 text-indigo-600 hover:cursor-pointer focus:ring-0 focus:ring-offset-0"
+                      className="h-5 w-5 rounded border-gray-300 pr-2 text-gray-700 hover:cursor-pointer focus:ring-0 focus:ring-offset-0"
                       onChange={(e) => handleSelectedChange(e)}
                       checked={params.getAll(section).includes(option)}
                     />

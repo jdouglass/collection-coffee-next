@@ -34,7 +34,7 @@ const FilterUtility: React.FC<IFilterUtility> = () => {
 
   return (
     <section
-      className={`grid max-md:grid-cols-2 xl:grid-cols-2 grid-cols-3 bg-white w-full items-center sticky top-16 py-3 z-10 ${
+      className={`grid max-md:grid-cols-2 xl:grid-cols-2 grid-cols-3 bg-white w-full items-center sticky top-16 py-1 z-10 ${
         scrolled ? 'border-b border-gray-200' : 'bg-white'
       }
       `}
@@ -43,10 +43,10 @@ const FilterUtility: React.FC<IFilterUtility> = () => {
         <SortSelect />
       </div>
       <span className="flex xl:justify-end justify-center xl:pr-5 max-md:justify-start">
-        <p className="flex pl-4 font-semibold">
+        <p className="flex pl-4 font-semibold text-sm">
           {productCount.data?.total ? productCount.data.total : 0}
         </p>
-        <p className="pl-2">products found</p>
+        <p className="text-sm pl-2">products found</p>
       </span>
       <div className="flex grow-0 xl:hidden justify-end pr-5">
         <button

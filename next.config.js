@@ -33,6 +33,7 @@ const nextConfig = {
     EMAIL_USERNAME: process.env.EMAIL_USERNAME,
     EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
     DISCORD_INVITE_URL: process.env.DISCORD_INVITE_URL,
+    DATABASE_URL: process.env.DATABASE_URL,
   },
   async headers() {
     return [

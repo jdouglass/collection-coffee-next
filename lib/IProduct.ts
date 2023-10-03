@@ -5,7 +5,7 @@ export interface IProduct {
   weight: number;
   price: string;
   process: string;
-  variety: string;
+  variety: string[];
   country: string;
   product_url: string;
   image_url: string;
@@ -13,7 +13,7 @@ export interface IProduct {
   date_added: Date;
   vendor: string;
   handle: string;
-  tasting_notes: string;
+  tasting_notes: string[];
   vendor_location: string;
   default_currency: string;
 }

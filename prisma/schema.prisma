@@ -49,3 +49,31 @@ model vendor_info {
   api_url          String[]
   default_currency String
 }
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model products2 {
+  id                   Int      @id(map: "products_duplicate_pkey") @default(autoincrement())
+  brand                String
+  title                String
+  weight               Int
+  process              String
+  process_category     String
+  variety              String[]
+  country              String
+  continent            String
+  product_url          String   @unique(map: "products_duplicate_product_url_idx")
+  image_url            String
+  sold_out             Boolean
+  date_added           DateTime @db.Timestamp(6)
+  vendor               String
+  handle               String
+  price                Decimal  @db.Decimal(6, 2)
+  tasting_notes        String[]
+  vendor_location      String
+  default_currency     String
+  on_sale              Boolean?
+  sale_price           Decimal? @db.Decimal(6, 2)
+  type                 String?
+  tasting_notes_string String?
+  variety_string       String?
+}

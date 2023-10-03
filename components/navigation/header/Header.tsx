@@ -76,7 +76,7 @@ const Header: React.FC<IHeader> = () => {
                 </div>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0">
-                <a href={process.env.DISCORD_INVITE_URL!} target="_blank">
+                <Link href={process.env.DISCORD_INVITE_URL!} target="_blank">
                   <button
                     type="button"
                     className="rounded-full bg-gray-700 p-1 text-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-700"
@@ -87,7 +87,7 @@ const Header: React.FC<IHeader> = () => {
                       aria-hidden="true"
                     />
                   </button>
-                </a>
+                </Link>
               </div>
             </div>
           </div>

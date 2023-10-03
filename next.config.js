@@ -32,6 +32,7 @@ const nextConfig = {
     SANITY_API_READ_TOKEN: process.env.SANITY_API_READ_TOKEN,
     EMAIL_USERNAME: process.env.EMAIL_USERNAME,
     EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
+    DISCORD_INVITE_URL: process.env.DISCORD_INVITE_URL,
   },
   async headers() {
     return [

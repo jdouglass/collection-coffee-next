@@ -27,22 +27,68 @@ export default async function getProducts(
         ? Prisma.validator<OrderByPrice>()({ price: 'asc' })
         : Prisma.validator<OrderByDate>()({ date_added: 'desc' });
 
-    const variety = req.query.Variety
-      ? Prisma.validator<Prisma.StringNullableListFilter>()({
-          hasSome: req.query.Variety,
-        })
-      : undefined;
-
-    const tasting_notes = req.query['Tasting Notes']
-      ? Prisma.validator<Prisma.StringNullableListFilter>()({
-          hasSome: req.query['Tasting Notes'],
-        })
-      : undefined;
-
     const limit = 12;
     const cursor = req.query.cursor ?? '';
     const cursorObj =
       cursor === '' ? undefined : { id: parseInt(cursor as string, 10) };
+
+    type variety_string_query = { variety_string: { contains: string } }[];
+    type tasting_notes_string_query = {
+      tasting_notes_string: { contains: string };
+    }[];
+
+    let variety_string: variety_string_query = [];
+    let tasting_notes_string: tasting_notes_string_query = [];
+
+    if (req.query.Variety && Array.isArray(req.query.Variety)) {
+      req.query.Variety.forEach((variety: string) => {
+        variety_string.push({
+          variety_string: {
+            contains: variety,
+          },
+        });
+      });
+    } else if (req.query.Variety && !Array.isArray(req.query.Variety)) {
+      variety_string.push({
+        variety_string: {
+          contains: req.query.Variety,
+        },
+      });
+    }
+
+    if (
+      req.query['Tasting Notes'] &&
+      Array.isArray(req.query['Tasting Notes'])
+    ) {
+      req.query['Tasting Notes'].forEach((variety: string) => {
+        tasting_notes_string.push({
+          tasting_notes_string: {
+            contains: variety,
+          },
+        });
+      });
+    } else if (
+      req.query['Tasting Notes'] &&
+      !Array.isArray(req.query['Tasting Notes'])
+    ) {
+      tasting_notes_string.push({
+        tasting_notes_string: {
+          contains: req.query['Tasting Notes'],
+        },
+      });
+    }
+
+    const combinedVarietyTastingQuery: {
+      variety_string?: { contains: string };
+      tasting_notes_string?: { contains: string };
+    }[] = [];
+
+    variety_string.forEach((variety) => {
+      combinedVarietyTastingQuery.push(variety);
+    });
+    tasting_notes_string.forEach((tasting_notes) => {
+      combinedVarietyTastingQuery.push(tasting_notes);
+    });
 
     const productsResponse = await prisma.products.findMany({
       skip: cursor !== '' ? 1 : 0,
@@ -63,11 +109,10 @@ export default async function getProducts(
             country: {
               in: req.query.Country,
             },
-            variety,
-            tasting_notes,
             vendor_location: {
               in: req.query['Vendor Location'],
             },
+            AND: combinedVarietyTastingQuery,
           },
         ],
       },
@@ -83,7 +128,7 @@ export default async function getProducts(
         weight: product.weight,
         price: product.price.toFixed(2),
         process: product.process,
-        variety: product.variety,
+        variety: product.variety_string as string,
         country: product.country,
         product_url: product.product_url,
         image_url: product.image_url,
@@ -91,7 +136,7 @@ export default async function getProducts(
         date_added: product.date_added,
         vendor: product.vendor,
         handle: product.handle,
-        tasting_notes: product.tasting_notes,
+        tasting_notes: product.tasting_notes_string as string,
         vendor_location: product.vendor_location as string,
         default_currency: product.default_currency as string,
       };

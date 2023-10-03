@@ -7,36 +7,38 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model products {
-  id               Int      @id @default(autoincrement())
-  brand            String
-  title            String
-  weight           Int
-  process          String
-  process_category String
-  variety          String[]
-  country          String
-  continent        String
-  product_url      String   @unique
-  image_url        String
-  sold_out         Boolean
-  date_added       DateTime @db.Timestamp(6)
-  vendor           String
-  handle           String
-  price            Decimal  @db.Decimal(6, 2)
-  tasting_notes    String[]
-  vendor_location  String
-  default_currency String
-  on_sale          Boolean?
-  sale_price       Decimal? @db.Decimal(6, 2)
-  type             String?
-}
-
 model countries {
   id       Int    @id @default(autoincrement())
   name     String @unique
   iso2     String
   currency String
+}
+
+model products {
+  id                   Int      @id @default(autoincrement())
+  brand                String
+  title                String
+  weight               Int
+  process              String
+  process_category     String
+  variety              String[]
+  country              String
+  continent            String
+  product_url          String   @unique
+  image_url            String
+  sold_out             Boolean
+  date_added           DateTime @db.Timestamp(6)
+  vendor               String
+  handle               String
+  price                Decimal  @db.Decimal(6, 2)
+  tasting_notes        String[]
+  vendor_location      String
+  default_currency     String
+  on_sale              Boolean?
+  sale_price           Decimal? @db.Decimal(6, 2)
+  type                 String?
+  tasting_notes_string String?
+  variety_string       String?
 }
 
 model vendor_info {

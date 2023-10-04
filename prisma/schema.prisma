@@ -77,3 +77,12 @@ model products2 {
   tasting_notes_string String?
   variety_string       String?
 }
+
+model audittrails {
+  id              String @id @default(cuid())
+  datetime        DateTime
+  event           String
+  url             String?
+
+  @@index([url])
+}

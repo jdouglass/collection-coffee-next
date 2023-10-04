@@ -7,12 +7,12 @@ import { usePathname } from 'next/navigation';
 import React from 'react';
 import CollectionCoffeeLogo from '../../../public/collection-coffee-logo.svg';
 import DiscordIcon from '../../../public/discord-logo.svg';
+import AuthButton from '../../buttons/authButton/authButton';
 
 export interface IHeader {}
 
 const navigation = [
   { name: 'Collection', href: '/collection' },
-  { name: 'Resources', href: '/resources' },
   { name: 'Contact', href: '/contact' },
 ];
 
@@ -75,6 +75,7 @@ const Header: React.FC<IHeader> = () => {
                   </div>
                 </div>
               </div>
+              <AuthButton />
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 md:static md:inset-auto md:ml-6 md:pr-0">
                 <Link href={process.env.DISCORD_INVITE_URL!} target="_blank">
                   <button

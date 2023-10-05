@@ -87,13 +87,13 @@ const ProductCard: React.FC<IProductCard> = ({
         <div>
           <p className="text-xs text-gray-400">Variety</p>
           <p className="text-sm mb-2 line-clamp-2">
-            {variety ? variety : 'Unknown'}
+            {variety ? variety.join(', ') : 'Unknown'}
           </p>
         </div>
         <div>
           <p className="text-xs text-gray-400">Tasting Notes</p>
           <p className="text-sm mb-2 line-clamp-2">
-            {tasting_notes ? tasting_notes : 'Unknown'}
+            {tasting_notes ? tasting_notes.join(', ') : 'Unknown'}
           </p>
         </div>
       </div>

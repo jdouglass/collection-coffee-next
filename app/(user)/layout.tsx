@@ -1,4 +1,3 @@
-import { ClerkProvider } from '@clerk/nextjs';
 import { AnalyticsWrapper } from '../../components/analytics/analytics';
 import Header from '../../components/navigation/header/Header';
 
@@ -18,14 +17,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body>
-          <Header />
-          {children}
-          <AnalyticsWrapper />
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en">
+      <body>
+        <Header />
+        {children}
+        <AnalyticsWrapper />
+      </body>
+    </html>
   );
 }
